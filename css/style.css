@@ -1,0 +1,42 @@
+
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+body{
+background: black;
+
+}
+  .page-heading{
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    color: blueviolet
+  }
+
+  .weather-output{
+      width: 90%;
+      border: solid 1px black;
+      border-radius: 40px;
+      text-align: center;
+      margin: auto;
+      font-size: 1.5em;
+      font-family: 'Work Sans', sans-serif;
+      background: white;
+  }
+
+  .stat{
+        padding: 4px;
+  }
+  
+  #more-info-section{
+   border-top: solid 1px black;
+
+  }
+
+  #more-info{
+    color: darkgoldenrod;
+    padding: 20px 0;
+  }
+
+  #lat-long{
+  }
