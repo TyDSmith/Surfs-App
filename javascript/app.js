@@ -5,7 +5,7 @@ var long = null;
 // Insert API Key if needed (not needed for spitcast)
 var APIKey = "";
 // Insert URL of API
-var queryURL = "http://api.spitcast.com/api/spot/all";
+var queryURL = "http://api.spitcast.com/api/county/spots/orange-county/";
 
 // Create AJAX call
 
@@ -30,7 +30,11 @@ var queryURL = "http://api.spitcast.com/api/spot/all";
 
         //create a for loop to display the info of every spot
         for (i=0;i<response.length;i++){
-            $("#spot-name-output").append("<div class='individual-spot-section' id='spot-section-num-"+i+"'>" + response[i].spot_name + " <br>"); 
+            var spotName = response[i].spot_name;
+            var spotID = response[i].spot_id;
+            console.log
+            $("#spot-name-output").append("<div class='individual-spot-section' id='spot-section-num-"+i+"'>" + spotName + " #"+ spotID+ " <br>"); 
+            // $("#spot-name-output").append("<div class='individual-spot-section' id='spot-section-num-"+i+"'>" + response[i].spot_name + " <br>"); 
         };
 
 
