@@ -2,6 +2,8 @@ var fTemp = null;
 var lat = null;
 var long = null;
 
+var spotID = null;
+
 // Insert API Key if needed (not needed for spitcast)
 var APIKey = "";
 // Insert URL of API
@@ -51,5 +53,12 @@ function displaySpotCards(){
     for(i=0;i< response[i].length; i++){
         console.log("spot");
         //display
+        styleSpotCard();
     }
 };
+
+
+function styleSpotCard(spotID){
+    //this function will be used to apply styling based on the conditions of each spot
+    $("#" + spotID).style(sdfs)
+}
