@@ -11,12 +11,20 @@ A collaboration between Ty Daniel Smith, Parker Bjur, & Orlando Rangel
 
 * Use user location to find nearby spots
 * Account setup for individual users to set favorites
-* Front end that displays:
-    * surf height by color
-    *
-* Front-end inputs:
-    * How far willing to drive
-    * Day of data to display. Default set to today
 
-* Outputs
-    * Distance driving time to each spot
+* Frontend
+    * input fields
+        * day (today defalt)
+        * distance willing to drive
+    * output fields
+        * surf options by color (green-red)
+
+* Backend
+    * inputs
+        * location
+            * lat, long
+        * distance
+    * outputs 
+        * surf height ordered greatest to least
+        * an array of objects sorted by height
+
