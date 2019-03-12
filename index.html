@@ -1,33 +1,36 @@
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="shortcut icon" href="../Surfs-app/images/favicon.ico" />
-  <title>Surf's App</title>
-  <script src="./javascript/jquery-v3.3.1.js"></script>
-  <script src="./javascript/app.js"></script>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
-<body onload="surfSetup();">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="shortcut icon" href="../Surfs-app/images/favicon.ico" />
+    <title>Surf's App</title>
+    <script src="./javascript/jquery-v3.3.1.js"></script>
+    <script src="./javascript/app.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  </head>
+  <body onload="surfSetup();">
     <div class="main contaniner">
       <div class="header">
-        <h1><img src="../Surfs-app/images/logo.jpg"> Surfs-App</h1>
-    
-        <form id="input">
-          Location: <input type="text" name="Location" value="">
-          Date: <input type="date" name="Date" value="">
-          <input type="submit" value="Search">
-          <i class="fa fa-search"></i>
-        </form>
+        <h1><img src="../Surfs-app/images/logo.jpg" /> Surfs-App</h1>
       </div>
 
+      <form id="input">
+        Location: <input type="text" name="Location" value="" /> Date:
+        <input type="date" name="Date" value="" />
+        <input type="submit" value="Search" />
+        <i class="fa fa-search"></i>
+      </form>
+
+      <div class="surfSpotsList">
+        <div class="singleSurfSpotCard">
+		  <div id="spot-name-output">SpotNamePlaceholder</div>
+		  <div id="spot-height-output">SpotSurfHeightPlaceholder</div>
+        </div>
+      </div>
     </div>
-    
-  <div id="spot-name-output"></div>
 
-</body>
-
+  </body>
 </html>
+
