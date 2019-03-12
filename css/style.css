@@ -1,11 +1,25 @@
-.individual-spot-section{
- 
-    padding: 5px;
+
+
+
+/* Surf Spot Card Layout */
+.singleSurfSpotCard{
+    padding: 10px;
     background: lightgray;
     border-radius: 5px;
     margin: 1px;
 }
 
+.spot-name-output{
+    font-size: 1.4em;
+    margin-bottom: 3px;
+}
 
+.spot-conditions-output{
 
+    margin-bottom: 3px;
+}
 
+.spot-height-output{
+   float: right;
+   font-size: 1.4em;
+}
