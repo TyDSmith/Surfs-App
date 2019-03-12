@@ -1,44 +1,33 @@
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="shortcut icon" href="../Surfs-app/images/favicon.ico" />
-  <title>Surf's App</title>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="shortcut icon" href="../Surfs-app/images/favicon.ico" />
+    <title>Surf's App</title>
     <script src="./javascript/jquery-v3.3.1.js"></script>
     <script src="./javascript/app.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body onload="surfSetup();">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  </head>
+  <body onload="surfSetup();">
     <div class="main contaniner">
       <div class="header">
-      <h1><img src="../Surfs-app/images/logo.jpg"> Surfs-App</h1>
+        <h1><img src="../Surfs-app/images/logo.jpg" /> Surfs-App</h1>
       </div>
 
       <form id="input">
-        Location: <input type="text" name="Location" value="">
-        Date: <input type="date" name="Date" value="">
-        <input type="submit" value="Search">
+        Location: <input type="text" name="Location" value="" /> Date:
+        <input type="date" name="Date" value="" />
+        <input type="submit" value="Search" />
         <i class="fa fa-search"></i>
       </form>
 
-      <div class="surfSpots">
-
+      <div class="surfSpotsList">
+        <div class="singleSurfSpotCard">
+		  <div id="spot-name-output">SpotNamePlaceholder</div>
+		  <div id="spot-height-output">SpotSurfHeightPlaceholder</div>
+        </div>
       </div>
-
     </div>
-    <!-- <div class="page-heading">Today's Weather in <span class="city"></span></div>
-    <div class="weather-output">
-    <div class="icon-output stat"></div>
-    <div class="wind stat"></div>
-    <div class="humidity stat"></div>
-    <div class="temp stat">Temperature: <span id="temp-output"></span></div>
-    <div id="more-info-section"> <span id="more-info"> More Info: </span><br><span class=city></span> is located at<span id="lat-long"><br></span>
-    </div>
-  </div> -->
-  <!-- <div id="spot-name-output"></div> -->
-
-</body>
-
+  </body>
 </html>
