@@ -1,4 +1,4 @@
-# where-should-i-surf
+# Surf's App
 
 ## Description
 A basic web app for checking surf reports and recommending a spot
