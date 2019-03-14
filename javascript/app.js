@@ -39,8 +39,13 @@ function findNearSpots () {
             findConditions(response[0].spot_id)
             for(i = 0; i < response.length; i++){
                 findDistance(response[i].coordinates)
-                displaySpotCards();
+                var spotID = response.spot_id;
+                displaySpotCards(spotID);
+                console.log(spotID);
+                //displaySpotCards();
             }
+            
+
         });
 }
 
@@ -49,9 +54,9 @@ findNearSpots()
 
 
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
-function displaySpotCards(){
+function displaySpotCards(spotID){
     for(i=0;i< response[i].length; i++){
-        console.log("spot");
+        console.log(spotID);
         //display
         styleSpotCard();
     }
