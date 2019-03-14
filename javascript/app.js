@@ -43,23 +43,35 @@ function findNearSpots () {
         url: "http://api.spitcast.com/api/spot-forecast/search",
         method: "GET"
         }).then(function(response) {
-            //console.log(response);
-            findConditions(response[0].spot_id)
+            // console.log(response);
+            // console.log(response[0].spot_id);
+            // console.log(response[0].average.size_max);
             for(i = 0; i < response.length; i++){
-                findDistance(response[i].coordinates)
-                var spotID = response.spot_id;
-                displaySpotCards(spotID);
-                //console.log(spotID);
-                //displaySpotCards();
+                var average= response[i].average.size;
+                var spotName= response[i].spot_name;
+                var spot= response[i].spot_id;
+                spotIDCall(spot);
+                //  console.log(spotName, spot);
             }
-            
-
         });
+    }
+
+findNearSpots();
+
+function spotIDCall(spot){
+// var spotId= $(findNearSpots(spotID));
+$.ajax({
+    url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
+    // url: "http://api.spitcast.com/api/spot/forecast/708/",
+    method: "GET"
+    }).then(function(response) {
+        // for (i=0; i < response.length; i++)
+        // spotId= findConditions(response[i].spot_id);
+        // console.log(spotId);
+
+        console.log(spot, response);
+    });
 }
-
-findNearSpots()
-
-
 
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
 function displaySpotCards(spotID){
@@ -84,7 +96,7 @@ function surfSetup(){
         method: "GET"
         }).then(function(response) {
             let responseJSON = JSON.parse(response);
-            console.log(responseJSON);
+            // console.log(responseJSON);
             // let userLatitude = responseJSON.latitude;
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
 
