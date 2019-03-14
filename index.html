@@ -5,8 +5,6 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="shortcut icon" href="../Surfs-app/images/favicon.ico" />
     <title>Surf's App</title>
-    
-    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <script src="./javascript/jquery-v3.3.1.js"></script>
@@ -14,60 +12,54 @@
 
     <script src="./javascript/app.js"></script>
   </head>
-  <body onload="surfSetup();">
-    <div class="main-contaniner">
-      <div class="header">
 
-        <!-- <h1><img src="../Surfs-app/images/logo.jpg" width=100 /> Surfs-App</h1> -->
 
-        <img src="../Surfs-app/images/logo.jpg" id="logo"/>
-        <h1 id="navHeader">Surfs-App</h1>
-        <div class="dropdown" id="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Counties
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-              <li><a href="#">HTML</a></li>
-              <li><a href="#">CSS</a></li>
-              <li><a href="#">JavaScript</a></li>
-            </ul>
-          </div>
+<body onload="surfSetup();">
 
-      </div>
-  
-        <span id="location-div" style="width:40%;">Your Location: <span id="yourLocation"></span></span><span style="width:10%"></span>
-        
-        <form id="input" style="display:inline; width: 40%; align-items: "> Date: 
-          <input type="date" name="Date" value="" />
-          <input type="submit" value="Search" />
-          <i class="fa fa-search"></i>
-        </form>
- 
-      <div class="surfSpotsList">
-        <div class="singleSurfSpotCard" id="spot-id-poor">
-          <div class="cardRowOne">
-            <div class="spot-name-output">La Jolla</div>
-            <div class="spot-conditions-output">Poor</div>
-            <div class="spot-height-output">4ft</div>
-          </div>	
-          <div class="spot-distance-output">
-            <span class="spotDistTime">25<span> Minute Drive
-          </div>
+	<div class="sidebar">
+		<span id="location-div" style="width:40%;">
+			<div id="yourLocationDiv">Your Location: <br><span id="yourLocation"></span></div>
+		</span><span style="width:10%"></span>
 
-        </div>
-        <div class="singleSurfSpotCard" id="spot-id-good">
-            <div class="cardRowOne">
-              <div class="spot-name-output">Huntington Beach Pier</div>
-              <div class="spot-conditions-output">Fair</div>
-              <div class="spot-height-output">2ft</div>
-            </div>	
-            <div class="spot-distance-output">
-              <span class="spotDistTime">55<span> Minute Drive
-            </div>
-  
-          </div>
-      </div>
-    </div>
+		<form id="input" style="display:inline; width: 40%; align-items: "> Date:
+			<input type="date" name="Date" value="" />
+			<input type="submit" value="Search" />
+			<i class="fa fa-search"></i>
+		</form>
+		<div class="surfSpotsList">
+			<div class="singleSurfSpotCard">
+				<div class="cardRowOne">
+					<div class="spot-name-output spot-name-good">Huntington Beach Pier</div>
+				</div>
+				<div class="spot-distance-output">
+					<span class="spotDistTime">53<span> Mins
+				</div>
+			</div>
+			<div class="singleSurfSpotCard spot-selected">
+				<div class="cardRowOne">
+					<div class="spot-name-output spot-name-fair">Newport Beach</div>
+				</div>
+				<div class="spot-distance-output">
+					<span class="spotDistTime">55<span> Mins
+				</div>
+			</div>
+			<div class="singleSurfSpotCard">
+					<div class="cardRowOne">
+						<div class="spot-name-output spot-name-poor">Laguna Beach</div>
+					</div>
+					<div class="spot-distance-output">
+						<span class="spotDistTime">59<span> Mins
+					</div>
+				</div>
+		</div>
+	</div>
+	<div id="mainContent">
+		<div class="main-spot-name">Newport Beach</div>
+		<div>
 
-  </body>
+		</div>
+	</div>
+
+</body>
+
 </html>
-
