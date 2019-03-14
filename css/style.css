@@ -1,32 +1,73 @@
 
-/* Surf Spot Card Layout */
+
+
+
+/*====== Sidebar ======*/
+
+.sidebar{
+    float: left;
+    width: 25%;
+    height: 100%;
+    font-size: 14px;
+    background: rgba(206, 206, 206, 0.66);
+    border-radius: 0 5px 5px 0
+
+}
+
+#yourLocationDiv{
+    text-align: center;
+}
+
+#yourLocation{
+    font-weight: 600;
+}
+
+
+/*=== Surf Spot Card Layout ===*/
 .singleSurfSpotCard{
-    padding: 10px;
-    height: 35%;
-    /* background: rgba(90, 224, 90, 0.74); */
-    /* border-radius: 5px; */
-    /* margin: 5px 7px; */
-
+    padding: 2px;
+    height: 75px;
 }
 
-
-#spot-id-poor{
-    background-image: linear-gradient(to bottom, #ee5959, #d95252, #c54a4a, #b14343, #9e3c3c);
+.spot-name-good{
+    color: rgb(71, 212, 90);
+}
+.spot-name-fair{
+    color: rgb(146, 212, 71);
 }
 
-#spot-id-good{
-    background-image: linear-gradient(to bottom, #59ee81, #53db78, #4ec96f, #48b767, #43a55e);
-}
-.cardRowOne{
-    display: flex;
-    font-size: 1.6em;
-    line-height: 1em;
+.spot-name-poor{
+    color: rgb(212, 71, 71);
 }
 
 .spot-name-output{
-    margin-bottom: 3px;
-    flex: 1;
+    float: left;
+    font-size: 1.2em;
+    font-weight: 600;
+    width: 65%;
+    line-height: 1.1em;
 }
+
+.spot-selected{
+    background: #2446c3;
+    border-radius: 0 5px 5px 0;
+}
+
+.spotDistTime{
+    float: right;
+    color: rgb(128, 128, 128);
+    margin-right: 2px;
+}
+
+
+
+/* .cardRowOne{
+    display: flex;
+    font-size: 1.6em;
+    line-height: 1em;
+} */
+
+
 
 
 .spot-height-output{
@@ -41,4 +82,13 @@
     text-align: center;
     flex: 2;
     border-radius: 20px;
+}
+
+
+/* ====== Main Content ====== */
+
+.main-spot-name{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 2em;
 }
