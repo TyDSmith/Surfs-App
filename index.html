@@ -5,15 +5,33 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="shortcut icon" href="../Surfs-app/images/favicon.ico" />
     <title>Surf's App</title>
-    <script src="./javascript/jquery-v3.3.1.js"></script>
-    <script src="./javascript/app.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script src="./javascript/jquery-v3.3.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <script src="./javascript/app.js"></script>
   </head>
   <body onload="surfSetup();">
     <div class="main-contaniner">
       <div class="header">
+
         <!-- <h1><img src="../Surfs-app/images/logo.jpg" width=100 /> Surfs-App</h1> -->
+
+        <img src="../Surfs-app/images/logo.jpg" id="logo"/>
+        <h1 id="navHeader">Surfs-App</h1>
+        <div class="dropdown" id="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Counties
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">HTML</a></li>
+              <li><a href="#">CSS</a></li>
+              <li><a href="#">JavaScript</a></li>
+            </ul>
+          </div>
+
       </div>
   
         <span id="location-div" style="width:40%;">Your Location: <span id="yourLocation"></span></span><span style="width:10%"></span>
