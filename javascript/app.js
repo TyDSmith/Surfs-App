@@ -2,6 +2,15 @@ var fTemp = null;
 var lat = null;
 var long = null;
 
+var spotID = null;
+
+// Insert API Key if needed (not needed for spitcast)
+var APIKey = "";
+// Insert URL of API
+var queryURL = "http://api.spitcast.com/api/spot-forecast/search";
+
+// Create AJAX call
+
 function findConditions (id) {
     $.ajax({
         url: `http://api.spitcast.com/api/spot/forecast/${id}/`,
@@ -10,6 +19,7 @@ function findConditions (id) {
         console.log(response, "conditions")
         for(i=0; i < response.length; i++){
             console.log(response[i].shape_full)
+
         }
     })
 }
@@ -35,11 +45,28 @@ function findNearSpots () {
         }).then(function(response) {
             console.log(response);
             findConditions(response[0].spot_id)
-            for(i=0; i < response.length; i++){
+            for(i = 0; i < response.length; i++){
                 findDistance(response[i].coordinates)
+                displaySpotCards();
             }
         });
 }
 
 findNearSpots()
 
+
+
+//this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
+function displaySpotCards(){
+    for(i=0;i< response[i].length; i++){
+        console.log("spot");
+        //display
+        styleSpotCard();
+    }
+};
+
+
+function styleSpotCard(spotID){
+    //this function will be used to apply styling based on the conditions of each spot
+    $("#" + spotID).style(sdfs)
+}
