@@ -53,21 +53,53 @@
             <span class="spotDistTime">25<span> Minute Drive
           </div>
 
-        </div>
-        <div class="singleSurfSpotCard" id="spot-id-good">
-            <div class="cardRowOne">
-              <div class="spot-name-output">Huntington Beach Pier</div>
-              <div class="spot-conditions-output">Fair</div>
-              <div class="spot-height-output">2ft</div>
-            </div>	
-            <div class="spot-distance-output">
-              <span class="spotDistTime">55<span> Minute Drive
-            </div>
-  
-          </div>
-      </div>
-    </div>
 
-  </body>
+<body onload="surfSetup();">
+
+	<div class="sidebar">
+		<span id="location-div" style="width:40%;">
+			<div id="yourLocationDiv">Your Location: <br><span id="yourLocation"></span></div>
+		</span><span style="width:10%"></span>
+
+		<form id="input" style="display:inline; width: 40%; align-items: "> Date:
+			<input type="date" name="Date" value="" />
+			<input type="submit" value="Search" />
+			<i class="fa fa-search"></i>
+		</form>
+		<div class="surfSpotsList">
+			<div class="singleSurfSpotCard">
+				<div class="cardRowOne">
+					<div class="spot-name-output spot-name-good">Huntington Beach Pier</div>
+				</div>
+				<div class="spot-distance-output">
+					<span class="spotDistTime">53<span> Mins
+				</div>
+			</div>
+			<div class="singleSurfSpotCard spot-selected">
+				<div class="cardRowOne">
+					<div class="spot-name-output spot-name-fair">Newport Beach</div>
+				</div>
+				<div class="spot-distance-output">
+					<span class="spotDistTime">55<span> Mins
+				</div>
+			</div>
+			<div class="singleSurfSpotCard">
+					<div class="cardRowOne">
+						<div class="spot-name-output spot-name-poor">Laguna Beach</div>
+					</div>
+					<div class="spot-distance-output">
+						<span class="spotDistTime">59<span> Mins
+					</div>
+				</div>
+		</div>
+	</div>
+	<div id="mainContent">
+		<div class="main-spot-name">Newport Beach</div>
+		<div>
+
+		</div>
+	</div>
+
+</body>
+
 </html>
-
