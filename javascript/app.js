@@ -2,6 +2,8 @@ var fTemp = null;
 var lat = null;
 var long = null;
 
+
+var userLocation = null;
 var spotID = null;
 
 // Insert API Key if needed (not needed for spitcast)
@@ -16,9 +18,9 @@ function findConditions (id) {
         url: `http://api.spitcast.com/api/spot/forecast/${id}/`,
         method: "GET"
     }).then(function(response) {
-        console.log(response, "conditions")
+        //console.log(response, "conditions")
         for(i=0; i < response.length; i++){
-            console.log(response[i].shape_full)
+            //console.log(response[i].shape_full)
 
         }
     })
@@ -43,13 +45,13 @@ function findNearSpots () {
         url: "http://api.spitcast.com/api/spot-forecast/search",
         method: "GET"
         }).then(function(response) {
-            console.log(response);
+            //console.log(response);
             findConditions(response[0].spot_id)
             for(i = 0; i < response.length; i++){
                 findDistance(response[i].coordinates)
                 var spotID = response.spot_id;
                 displaySpotCards(spotID);
-                console.log(spotID);
+                //console.log(spotID);
                 //displaySpotCards();
             }
             
@@ -61,10 +63,32 @@ findNearSpots()
 
 
 
+function useCurrentLocation(){
+    $.ajax({
+        url: "http://geoip-db.com/json/",
+        method: "GET"
+        }).then(function(response) {
+            //console.log(response);
+            findConditions(response.country_code)
+           
+            for(i = 0; i < response.length; i++){
+                findDistance(response[i].coordinates)
+                var spotID = response.spot_id;
+                displaySpotCards(spotID);
+                //console.log(spotID);
+                //displaySpotCards();
+            }
+            
+
+        });
+//  var userLocation = 
+
+};
+
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
 function displaySpotCards(spotID){
     for(i=0;i< response[i].length; i++){
-        console.log(spotID);
+        //console.log(spotID);
         //display
         styleSpotCard();
     }
@@ -74,4 +98,24 @@ function displaySpotCards(spotID){
 function styleSpotCard(spotID){
     //this function will be used to apply styling based on the conditions of each spot
     $("#" + spotID).style(sdfs)
+}
+
+
+function useCurrentLocation(){
+    $.ajax({
+        url: "http://geoip-db.com/json/",
+        method: "GET"
+        }).then(function(response) {
+            let responseJSON = JSON.parse(response);
+            console.log(responseJSON);
+            console.log(responseJSON.city);
+            let userLatitude = responseJSON.latitude;
+            console.log(userLatitude);
+            //console.log(response[0].city);
+           
+        });
+}
+
+function surfSetup(){
+    //console.log("setup");
 }
