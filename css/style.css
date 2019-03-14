@@ -1,22 +1,29 @@
 
-
-
 /* Surf Spot Card Layout */
 .singleSurfSpotCard{
     padding: 10px;
-    background: rgba(211, 211, 211, 0.534);
-    border-radius: 5px;
-    margin: 5px 7px;
+    height: 35%;
+    /* background: rgba(90, 224, 90, 0.74); */
+    /* border-radius: 5px; */
+    /* margin: 5px 7px; */
 
 }
 
+
+#spot-id-poor{
+    background-image: linear-gradient(to bottom, #ee5959, #d95252, #c54a4a, #b14343, #9e3c3c);
+}
+
+#spot-id-good{
+    background-image: linear-gradient(to bottom, #59ee81, #53db78, #4ec96f, #48b767, #43a55e);
+}
 .cardRowOne{
     display: flex;
     font-size: 1.6em;
+    line-height: 1em;
 }
 
 .spot-name-output{
-
     margin-bottom: 3px;
     flex: 1;
 }
@@ -30,7 +37,7 @@
 }
 .spot-conditions-output{
     margin-bottom: 3px;
-    background: rgba(38, 221, 38, 0.74);
+ 
     text-align: center;
     flex: 2;
     border-radius: 20px;
