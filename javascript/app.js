@@ -2,6 +2,8 @@ var fTemp = null;
 var lat = null;
 var long = null;
 
+var spotID = null;
+
 // Insert API Key if needed (not needed for spitcast)
 var APIKey = "";
 // Insert URL of API
@@ -23,14 +25,22 @@ function findConditions (id) {
 }
 
 function findDistance (place) {
+    $.ajax({
+        url: "https://api.opencagedata.com/geocode/v1/json?q=riverside%2C%20california&key=b0359f420459420d8b88c3125472360e&language=en&pretty=1",
+        method: "GET"
+    }).then(function(response) {
+        let userLatitude = response.results[0].geometry.lat
+        let userLongitude = response.results[0].geometry.Lng
+    })
     let placeLatitude = place[0];
     let placeLongitude = place[1];
-    console.log(placeLatitude, placeLongitude)
+    console.log("user " + userLatitude, userLongitude)
+    console.log("place " + placeLatitude, placeLongitude)
 }
 
 function findNearSpots () {
     $.ajax({
-        url: queryURL,
+        url: "http://api.spitcast.com/api/spot-forecast/search",
         method: "GET"
         }).then(function(response) {
             console.log(response);
@@ -51,5 +61,12 @@ function displaySpotCards(){
     for(i=0;i< response[i].length; i++){
         console.log("spot");
         //display
+        styleSpotCard();
     }
 };
+
+
+function styleSpotCard(spotID){
+    //this function will be used to apply styling based on the conditions of each spot
+    $("#" + spotID).style(sdfs)
+}
