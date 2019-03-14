@@ -1,6 +1,20 @@
 /*header*/
+#logo{
+    height: 100%;
+    width: auto;
+}
 
+#navHeader {
+    display: inline;
+}
 
+.header {
+    height: 15vh;
+}
+
+#dropdown {
+    float: right;
+}
 /* end of header */
 
 /* Surf Spot Card Layout */
