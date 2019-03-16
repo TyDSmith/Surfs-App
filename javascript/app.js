@@ -4,12 +4,35 @@ var long = null;
 
 var spotID = null;
 
+let userLocation;
+
 // Insert API Key if needed (not needed for spitcast)
 var APIKey = "";
 // Insert URL of API
 var queryURL = "http://api.spitcast.com/api/spot-forecast/search";
 
 // Create AJAX call
+
+let spotArray= []
+
+function spot(spotId, spotName, spotLat, spotLong){
+    this.spotId = spotId;
+    this.spotLat = spotLat;
+    this.spotLong = spotLong;
+    this.spotName = spotName;
+}
+
+function findDistances (){
+    console.log(spotArray)
+    for(i = 0; i < spotArray.length; i++){
+        console.log([userLocation[0], userLocation[1]])
+        console.log([spotArray[i].spotLat, spotArray[i].spotLong])
+        let distance = haversineDistance([userLocation[0], userLocation[1]], [spotArray[i].spotLat, spotArray[i].spotLong])
+        spotArray[i].distance = distance;
+        //console.log(spotArray[i])
+    }
+    console.log(spotArray)
+}
 
 function findConditions (id) {
     $.ajax({
@@ -38,41 +61,17 @@ function findConditions (id) {
 //     console.log("place " + placeLatitude, placeLongitude)
 // }
 
-function calculateDistance (lat1, lat2, lon1, lon2) {
-    // var R = 6371e3; // metres
-    // var φ1 = lat1 * (Math.PI/180)
-    // var φ2 = lat2 * (Math.PI/180)
-    // var Δφ = (lat2-lat1) * (Math.PI/180)
-    // var Δλ = (lon2-lon1) * (Math.PI/180)
-
-    // var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-    //         Math.cos(φ1) * Math.cos(φ2) *
-    //         Math.sin(Δλ/2) * Math.sin(Δλ/2);
-    // var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-    // var distanceInMeters = R * c;
-    // console.log(distanceInMeters, "meters")
-
-    // let distanceInMiles = distanceInMeters/1609.344
-
-    // let latLenght = userLat - placeLat
-    // let longLength = userLong - placeLong
-    // let distance = Math.sqrt((latLenght*latLenght)+(longLength*longLength))
-    //let distanceInMiles = distance * 69
-
-    return distanceInMiles
-}
 
 function haversineDistance(coords1, coords2, isMiles) {
     function toRad(x) {
       return x * Math.PI / 180;
     }
-  
-    var lon1 = coords1[1];
     var lat1 = coords1[0];
-  
-    var lon2 = coords2[1];
+    var lon1 = coords1[1];
+
     var lat2 = coords2[0];
+    var lon2 = coords2[1];
+    
   
     var R = 6371; // km
   
@@ -91,22 +90,43 @@ function haversineDistance(coords1, coords2, isMiles) {
     return d;
   }
 
+
 function findAllSpotIds () {
+
     $.ajax({
         url: "http://api.spitcast.com/api/spot-forecast/search",
         method: "GET"
         }).then(function(response) {
 
+            //console.log(response);
+            // console.log(response[0].spot_id);
+            // console.log(response[0].average.size_max);
+            for(i = 0; i < response.length; i++){
+                var average = response[i].average.size;
+                var spotName = response[i].spot_name;
+                console.log(spotName)
+                var spotId = response[i].spot_id;
+                var spotLat = response[i].coordinates[1]
+                var spotLong = response[i].coordinates[0]
+
+                spotArray[i] = new spot(spotId, spotName, spotLat, spotLong)
+                //console.log(spotArray[i])
+                //  console.log(spotName, spot);
+            }
+            console.log(spotArray, "spotArray")
+            findDistances()
+            
             for(i = 0; i < response.length; i++){
                 var average= response[i].average.size;
                 var spotName= response[i].spot_name;
                 var spot= response[i].spot_id;
                 averageHeightPerHour(spot);
+
             }
+            //console.log(spotArray, "spotArray")
         });
     }
 
-    findAllSpotIds();
 
 function averageHeightPerHour (spot){
 $.ajax({
@@ -140,28 +160,59 @@ $.ajax({
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
 function displaySpotCards(spotID){
     for(i=0;i< response[i].length; i++){
-        //console.log(spotID);
+        console.log(spotID);
         //display
         styleSpotCard();
     }
 };
 
-
 function styleSpotCard(spotID){
     //this function will be used to apply styling based on the conditions of each spot
     $("#" + spotID).style(sdfs)
+
+    //if spot conditions == fair ... apply class spot-name-fair
 }
 
-
-
-function surfSetup(){
+function stealTheirLocation () {
     $.ajax({
         url: "http://geoip-db.com/json/",
         method: "GET"
         }).then(function(response) {
             let responseJSON = JSON.parse(response);
+            userLocation = [responseJSON.latitude, responseJSON.longitude]
+            //console.log(userLocation, "response")
+            // console.log(responseJSON);
             // console.log(responseJSON);
             // let userLatitude = responseJSON.latitude;
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
+
+            findAllSpotIds();
+
+            displaySpotCards();
+
         });
 }
+
+
+function surfSetup(){
+    stealTheirLocation();
+    
+}
+
+//Toggle menu options
+$(function() {
+    $('.singleSurfSpotCard').click(function(e) {
+       e.preventDefault();
+       $(this).addClass('active').siblings().removeClass('active');
+
+    });
+
+    $('.singleSurfSpotCard').click(function(e) {
+        var spotName = $(this).find('.spot-name-output').text();
+        $('#mainContent').html("<div class='main-spot-name'>"+spotName+"</div>");
+        
+    })
+});
+
+//show relevent content when button is pushed
+
