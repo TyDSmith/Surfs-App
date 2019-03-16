@@ -90,11 +90,14 @@ function haversineDistance(coords1, coords2, isMiles) {
     return d;
   }
 
-function findNearSpots () {
+
+function findAllSpotIds () {
+
     $.ajax({
         url: "http://api.spitcast.com/api/spot-forecast/search",
         method: "GET"
         }).then(function(response) {
+
             //console.log(response);
             // console.log(response[0].spot_id);
             // console.log(response[0].average.size_max);
@@ -110,32 +113,46 @@ function findNearSpots () {
                 //console.log(spotArray[i])
                 //  console.log(spotName, spot);
             }
+<<<<<<< HEAD
             console.log(spotArray, "spotArray")
             findDistances()
+=======
+            
+            for(i = 0; i < response.length; i++){
+                var average= response[i].average.size;
+                var spotName= response[i].spot_name;
+                var spot= response[i].spot_id;
+                averageHeightPerHour(spot);
+
+            }
+            //console.log(spotArray, "spotArray")
+>>>>>>> 2fb1bbaccbd1ce177f9a8e0792d20789f4b8ab9e
         });
     }
 
-//findNearSpots();
 
-function spotIDCall(spot){
-// var spotId= $(findNearSpots(spotID));
+function averageHeightPerHour (spot){
 $.ajax({
     url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
-    // url: "http://api.spitcast.com/api/spot/forecast/708/",
+
     method: "GET"
     }).then(function(response) {
-        // for (i=0; i < response.length; i++)
-        // spotId= findConditions(response[i].spot_id);
-        // console.log(spotId);
 
-        //console.log(spot, response);
+        for (i=0; i < response.length; i++)
+        var nameSpot= response[i].spot_name;
+        console.log(nameSpot);
+        console.log(spot);
+            for(i = 0; i < response.length; i++){
+                let answer = response[i].size_ft
+                //console.log(answer)
+            }
     });
 }
 
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
 function displaySpotCards(spotID){
     for(i=0;i< response[i].length; i++){
-        //console.log(spotID);
+        console.log(spotID);
         //display
         styleSpotCard();
     }
@@ -144,6 +161,8 @@ function displaySpotCards(spotID){
 function styleSpotCard(spotID){
     //this function will be used to apply styling based on the conditions of each spot
     $("#" + spotID).style(sdfs)
+
+    //if spot conditions == fair ... apply class spot-name-fair
 }
 
 function stealTheirLocation () {
@@ -158,11 +177,35 @@ function stealTheirLocation () {
             // console.log(responseJSON);
             // let userLatitude = responseJSON.latitude;
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
+<<<<<<< HEAD
             findNearSpots();
+=======
+            displaySpotCards();
+>>>>>>> 2fb1bbaccbd1ce177f9a8e0792d20789f4b8ab9e
         });
 }
+
 
 function surfSetup(){
     stealTheirLocation();
     
 }
+
+//Toggle menu options
+$(function() {
+    $('.singleSurfSpotCard').click(function(e) {
+       e.preventDefault();
+       $(this).addClass('active').siblings().removeClass('active');
+
+    });
+
+    $('.singleSurfSpotCard').click(function(e) {
+        var spotName = $(this).find('.spot-name-output').text();
+        // $('#mainContent').empty();
+        $('#mainContent').html("<div class='main-spot-name'>"+spotName+"</div>");
+        console.log("click!");
+    })
+});
+
+//show relevent content when button is pushed
+
