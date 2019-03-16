@@ -167,9 +167,8 @@ $(function() {
 
     $('.singleSurfSpotCard').click(function(e) {
         var spotName = $(this).find('.spot-name-output').text();
-        // $('#mainContent').empty();
         $('#mainContent').html("<div class='main-spot-name'>"+spotName+"</div>");
-        console.log("click!");
+        
     })
 });
 
