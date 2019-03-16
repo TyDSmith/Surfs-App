@@ -91,41 +91,37 @@ function haversineDistance(coords1, coords2, isMiles) {
     return d;
   }
 
-  console.log(haversineDistance([33.9533,-117.3962],[33.660057,-117.998970]))
-console.log(calculateDistance(33.9533,-117.3962,33.660057,-117.998970))
-
-function findNearSpots () {
+function findAllSpotIds () {
     $.ajax({
         url: "http://api.spitcast.com/api/spot-forecast/search",
         method: "GET"
         }).then(function(response) {
-            // console.log(response);
-            // console.log(response[0].spot_id);
-            // console.log(response[0].average.size_max);
+            
             for(i = 0; i < response.length; i++){
                 var average= response[i].average.size;
                 var spotName= response[i].spot_name;
                 var spot= response[i].spot_id;
-                spotIDCall(spot);
-                //  console.log(spotName, spot);
+                averageHeightPerHour(spot);
             }
         });
     }
 
-findNearSpots();
+    findAllSpotIds();
 
-function spotIDCall(spot){
-// var spotId= $(findNearSpots(spotID));
+function averageHeightPerHour (spot){
 $.ajax({
     url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
-    // url: "http://api.spitcast.com/api/spot/forecast/708/",
+
     method: "GET"
     }).then(function(response) {
-        // for (i=0; i < response.length; i++)
-        // spotId= findConditions(response[i].spot_id);
-        // console.log(spotId);
-
-        console.log(spot, response);
+        for (i=0; i < response.length; i++)
+        var nameSpot= response[i].spot_name;
+        console.log(nameSpot);
+        console.log(spot);
+            for(i = 0; i < response.length; i++){
+                let answer = response[i].size_ft
+                console.log(answer)
+            }
     });
 }
 
