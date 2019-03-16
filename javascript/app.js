@@ -96,7 +96,7 @@ function findAllSpotIds () {
         url: "http://api.spitcast.com/api/spot-forecast/search",
         method: "GET"
         }).then(function(response) {
-            
+
             for(i = 0; i < response.length; i++){
                 var average= response[i].average.size;
                 var spotName= response[i].spot_name;
@@ -114,14 +114,26 @@ $.ajax({
 
     method: "GET"
     }).then(function(response) {
-        for (i=0; i < response.length; i++)
-        var nameSpot= response[i].spot_name;
+        // response is an array of 184 spots for each spot
+        var nameSpot= response[0].spot_name;
         console.log(nameSpot);
-        console.log(spot);
-            for(i = 0; i < response.length; i++){
-                let answer = response[i].size_ft
-                console.log(answer)
-            }
+        $("#cardSpot").append("<div>" + nameSpot + "</div>")
+     for (i=0; i < response.length; i++){
+            let answer = response[i].size_ft
+            console.log(answer);
+            $("#cardSpot").append("<div>" + answer + "</div>")
+        
+        // console.log(response);
+            // console.log(nameSpot);
+            // console.log(nameSpot, spot);
+    
+        
+        
+            //  for(i = 0; i < response.length; i++){
+            //     console.log(answer)
+        //  }
+        
+        }   
     });
 }
 
