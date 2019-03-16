@@ -157,3 +157,11 @@ function surfSetup(){
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
         });
 }
+
+
+$(function() {
+    $('.singleSurfSpotCard').click(function(e) {
+       e.preventDefault();
+       $(this).addClass('active').siblings().removeClass('active');
+    });
+});
