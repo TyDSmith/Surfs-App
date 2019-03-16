@@ -113,10 +113,8 @@ function findAllSpotIds () {
                 //console.log(spotArray[i])
                 //  console.log(spotName, spot);
             }
-<<<<<<< HEAD
             console.log(spotArray, "spotArray")
             findDistances()
-=======
             
             for(i = 0; i < response.length; i++){
                 var average= response[i].average.size;
@@ -126,7 +124,6 @@ function findAllSpotIds () {
 
             }
             //console.log(spotArray, "spotArray")
->>>>>>> 2fb1bbaccbd1ce177f9a8e0792d20789f4b8ab9e
         });
     }
 
@@ -177,11 +174,11 @@ function stealTheirLocation () {
             // console.log(responseJSON);
             // let userLatitude = responseJSON.latitude;
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
-<<<<<<< HEAD
+
             findNearSpots();
-=======
+
             displaySpotCards();
->>>>>>> 2fb1bbaccbd1ce177f9a8e0792d20789f4b8ab9e
+
         });
 }
 
