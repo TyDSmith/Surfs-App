@@ -15,22 +15,23 @@ var queryURL = "http://api.spitcast.com/api/spot-forecast/search";
 
 let spotArray= []
 
-function spot(spotId, spotLat, spotLong){
+function spot(spotId, spotName, spotLat, spotLong){
     this.spotId = spotId;
     this.spotLat = spotLat;
-    this.spotLong = spotLong
+    this.spotLong = spotLong;
+    this.spotName = spotName;
 }
 
 function findDistances (){
-    console.log("working")
     console.log(spotArray)
-    console.log(spotArray.length)
     for(i = 0; i < spotArray.length; i++){
-        console.log(i)
-        let distance = haversineDistance(userLocation, spotArray[i])
+        console.log([userLocation[0], userLocation[1]])
+        console.log([spotArray[i].spotLat, spotArray[i].spotLong])
+        let distance = haversineDistance([userLocation[0], userLocation[1]], [spotArray[i].spotLat, spotArray[i].spotLong])
         spotArray[i].distance = distance;
-        console.log(spotArray[i])
+        //console.log(spotArray[i])
     }
+    console.log(spotArray)
 }
 
 function findConditions (id) {
@@ -65,12 +66,12 @@ function haversineDistance(coords1, coords2, isMiles) {
     function toRad(x) {
       return x * Math.PI / 180;
     }
-  
-    var lon1 = coords1[1];
     var lat1 = coords1[0];
-  
-    var lon2 = coords2[1];
+    var lon1 = coords1[1];
+
     var lat2 = coords2[0];
+    var lon2 = coords2[1];
+    
   
     var R = 6371; // km
   
@@ -100,17 +101,18 @@ function findNearSpots () {
             for(i = 0; i < response.length; i++){
                 var average = response[i].average.size;
                 var spotName = response[i].spot_name;
+                console.log(spotName)
                 var spotId = response[i].spot_id;
                 var spotLat = response[i].coordinates[1]
                 var spotLong = response[i].coordinates[0]
 
-                spotArray[i] = new spot(spotId, spotLat, spotLong)
+                spotArray[i] = new spot(spotId, spotName, spotLat, spotLong)
                 //console.log(spotArray[i])
                 //  console.log(spotName, spot);
             }
-            //console.log(spotArray, "spotArray")
+            console.log(spotArray, "spotArray")
+            findDistances()
         });
-        findDistances();
     }
 
 //findNearSpots();
@@ -151,15 +153,16 @@ function stealTheirLocation () {
         }).then(function(response) {
             let responseJSON = JSON.parse(response);
             userLocation = [responseJSON.latitude, responseJSON.longitude]
-            // console.log(userLocation, "response")
+            //console.log(userLocation, "response")
             // console.log(responseJSON);
             // console.log(responseJSON);
             // let userLatitude = responseJSON.latitude;
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
+            findNearSpots();
         });
 }
 
 function surfSetup(){
     stealTheirLocation();
-    findNearSpots();
+    
 }
