@@ -28,11 +28,10 @@
 
 .sidebar{
     float: left;
-    /* position: absolute; */
     display: inline-block;
     width: 25%;
+    max-width: 200px;
     color: rgb(32, 184, 230);
-    height: 100%;
     font-size: 14px;
     background-image: url('/images/580b585b2edbce24c47b2732.png');
     border-radius: 0 5px 5px 0;
@@ -156,4 +155,15 @@
 
   .anychart-credits{
       display: none;
+  }
+
+/* Make mobile friendly  */
+  @media screen and (max-width:650px){
+    .singleSurfSpotCard{
+        height: 112px;
+    }
+
+    .spot-conditions-tag{
+        width: 100%;
+    }
   }

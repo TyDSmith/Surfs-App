@@ -38,16 +38,33 @@ function displaySpotCards(){
         for(i=0; i < 4; i++){
             spotName= spotArray[i].spotName;
             spot = spotArray[i].spotId;
+         
             var singleCardDiv = "<div class='singleSurfSpotCard'>";
             var singleCardDivRowOne = "<div class='cardRowOne' id='card-spotid-" + spot + "'>";
             var singleCardNameOutput = "<div class='spot-name-output'>"+spotName;
+            // var singleCardSpotConditions = spotArray[i].spotConditions;
             var spotConditionsCardDiv = "<div class='spot-conditions-card-div'> <span class='spot-conditions-tag tag-fair'>" +"conditions<span>";
             var closeDiv = "</div>";
 
-
             console.log(spotName);
+
             $(".surfSpotsList").prepend(singleCardDiv + singleCardDivRowOne  + singleCardNameOutput + closeDiv + closeDiv + spotConditionsCardDiv + closeDiv);
             }
+            
+            //Toggle menu options
+            $(function() {
+                $('.singleSurfSpotCard').click(function(e) {
+                e.preventDefault();
+                $(this).addClass('active').siblings().removeClass('active');
+
+                });
+
+                $('.singleSurfSpotCard').click(function(e) {
+                    var spotName = $(this).find('.spot-name-output').text();
+                    $('#main-spot-name').html(spotName);
+                    
+                })
+});
         };
 
 function styleSpotCard(spotID){
@@ -135,20 +152,7 @@ function surfSetup(){
 
 }
 
-//Toggle menu options
-$(function() {
-    $('.singleSurfSpotCard').click(function(e) {
-       e.preventDefault();
-       $(this).addClass('active').siblings().removeClass('active');
 
-    });
-
-    $('.singleSurfSpotCard').click(function(e) {
-        var spotName = $(this).find('.spot-name-output').text();
-        $('#main-spot-name').html(spotName);
-        
-    })
-});
 
 
 //show relevent content when button is pushed
