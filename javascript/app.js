@@ -1,12 +1,8 @@
-var fTemp = null;
-var lat = null;
-var long = null;
-
-var spotID = null;
-
+//global variables
 let userLocation;
 
 let spotArray= [];
+let displayedSpots = [];
 
 class Spot {
     constructor(spotId, spotName, spotLat, spotLong, average) {
@@ -18,6 +14,25 @@ class Spot {
     }
 }
 
+/* <script>
+var points = [40, 100, 1, 5, 25, 10];
+document.getElementById("demo").innerHTML = points;  
+
+function myFunction() {
+  points.sort(function(a, b){return a - b});
+  document.getElementById("demo").innerHTML = points;
+}
+</script> */
+
+function getTopTen () {
+    spotArray.sort(function (a, b) {
+        return a.distance - b.distance;
+      });
+      console.log(spotArray)
+      displaySpotCards();
+}
+
+//load all the objects
 function averageHeightPerHour (){
     for(i=0; i < spotArray.length; i++){
         spot = spotArray[i].spotId
@@ -25,14 +40,14 @@ function averageHeightPerHour (){
             url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
             method: "GET"
             }).then(function(response){
-                console.log(response)
                 conditionArray = []
                 for(i = 0; i < response.length; i++){
                     let status = response[i].size_ft
                     conditionArray.push(status)
                 }
                 spotArray[i].sizeArray = conditionArray
-                console.log(spotArray[i])
+                
+
             });
     }
 }
@@ -40,7 +55,6 @@ function averageHeightPerHour (){
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
 function displaySpotCards(spotID){
     for(i=0;i< response[i].length; i++){
-        //console.log(spotID);
         //display
         styleSpotCard();
     }
@@ -86,6 +100,7 @@ function findDistances (){
         let distance = haversineDistance([userLocation[0], userLocation[1]], [spotArray[i].spotLat, spotArray[i].spotLong])
         spotArray[i].distance = distance;
     }
+    getTopTen()
 }
 
 function findAllSpotIds () {
@@ -117,8 +132,6 @@ function stealTheirLocation () {
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
 
             findAllSpotIds();
-
-
             displaySpotCards();
 
         });
@@ -128,6 +141,7 @@ function stealTheirLocation () {
 function surfSetup(){
     stealTheirLocation()
 }
+
 
 //Toggle menu options
 $(function() {
@@ -143,6 +157,7 @@ $(function() {
         
     })
 });
+
 
 //show relevent content when button is pushed
 
@@ -180,3 +195,4 @@ $(function() {
   chart.container("container");
   chart.draw();
 });
+
