@@ -13,14 +13,18 @@ var queryURL = "http://api.spitcast.com/api/spot-forecast/search";
 
 // Create AJAX call
 
-let spotArray= []
+let spotArray= [];
 
-function spot(spotId, spotName, spotLat, spotLong){
-    this.spotId = spotId;
-    this.spotLat = spotLat;
-    this.spotLong = spotLong;
-    this.spotName = spotName;
+class Spot {
+    constructor(spotId, spotName, spotLat, spotLong) {
+        this.spotId = spotId;
+        this.spotLat = spotLat;
+        this.spotLong = spotLong;
+        this.spotName = spotName;
+    }
 }
+
+
 
 function findDistances (){
     console.log(spotArray)
@@ -91,44 +95,6 @@ function haversineDistance(coords1, coords2, isMiles) {
   }
 
 
-function findAllSpotIds () {
-
-    $.ajax({
-        url: "http://api.spitcast.com/api/spot-forecast/search",
-        method: "GET"
-        }).then(function(response) {
-
-            //console.log(response);
-            // console.log(response[0].spot_id);
-            // console.log(response[0].average.size_max);
-            for(i = 0; i < response.length; i++){
-                var average = response[i].average.size;
-                var spotName = response[i].spot_name;
-                console.log(spotName)
-                var spotId = response[i].spot_id;
-                var spotLat = response[i].coordinates[1]
-                var spotLong = response[i].coordinates[0]
-
-                spotArray[i] = new spot(spotId, spotName, spotLat, spotLong)
-                //console.log(spotArray[i])
-                //  console.log(spotName, spot);
-            }
-<<<<<<< HEAD
-            console.log(spotArray, "spotArray")
-            findDistances()
-=======
-            
-            for(i = 0; i < response.length; i++){
-                var average= response[i].average.size;
-                var spotName= response[i].spot_name;
-                var spot= response[i].spot_id;
-                averageHeightPerHour(spot);
-
-            }
-            //console.log(spotArray, "spotArray")
->>>>>>> 2fb1bbaccbd1ce177f9a8e0792d20789f4b8ab9e
-        });
-    }
 
 
 function averageHeightPerHour (spot){
@@ -165,6 +131,42 @@ function styleSpotCard(spotID){
     //if spot conditions == fair ... apply class spot-name-fair
 }
 
+function findAllSpotIds () {
+
+    $.ajax({
+        url: "http://api.spitcast.com/api/spot-forecast/search",
+        method: "GET"
+        }).then(function(response) {
+
+            //console.log(response);
+            // console.log(response[0].spot_id);
+            // console.log(response[0].average.size_max);
+            for(i = 0; i < response.length; i++){
+                var average = response[i].average.size;
+                var spotName = response[i].spot_name;
+                console.log(spotName)
+                var spotId = response[i].spot_id;
+                var spotLat = response[i].coordinates[1]
+                var spotLong = response[i].coordinates[0]
+
+                spotArray[i] = new Spot(spotId, spotName, spotLat, spotLong)
+                //console.log(spotArray[i])
+                //  console.log(spotName, spot);
+            }
+            console.log(spotArray, "spotArray")
+            findDistances()
+            
+            for(i = 0; i < response.length; i++){
+                var average= response[i].average.size;
+                var spotName= response[i].spot_name;
+                var spot= response[i].spot_id;
+                averageHeightPerHour(spot);
+
+            }
+            //console.log(spotArray, "spotArray")
+        });
+    }
+
 function stealTheirLocation () {
     $.ajax({
         url: "http://geoip-db.com/json/",
@@ -177,18 +179,13 @@ function stealTheirLocation () {
             // console.log(responseJSON);
             // let userLatitude = responseJSON.latitude;
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
-<<<<<<< HEAD
-            findNearSpots();
-=======
-            displaySpotCards();
->>>>>>> 2fb1bbaccbd1ce177f9a8e0792d20789f4b8ab9e
+            findAllSpotIds();
         });
 }
 
 
 function surfSetup(){
     stealTheirLocation();
-    
 }
 
 //Toggle menu options
@@ -208,4 +205,3 @@ $(function() {
 });
 
 //show relevent content when button is pushed
-
