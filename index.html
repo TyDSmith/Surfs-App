@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <script src="./javascript/jquery-v3.3.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+	<script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
+	<script src="https://cdn.anychart.com/releases/8.0.0/themes/dark_earth.min.js" type="text/javascript"></script>
     <script src="./javascript/app.js"></script>
   </head>
 
@@ -21,43 +22,53 @@
 			<div id="yourLocationDiv">Your Location: <br><span id="yourLocation"></span></div>
 		</span><span style="width:10%"></span>
 
-		<form id="input" style="display:inline; width:40%;"> Date:
+		<!-- <form id="input" style="display:inline; width:40%;"> Date:
 			<input type="date" name="Date" style="width:80%;" value="" />
 			<input type="submit" class="fa fa-search" value="submit"/>
 			<i class="fa fa-search"></i>
-		</form>
+		</form> -->
 		<div class="surfSpotsList">
-			<div class="singleSurfSpotCard">
+			<div class="singleSurfSpotCard active">
 				<div class="cardRowOne">
-					<div class="spot-name-output spot-name-good">Huntington Beach Pier</div>
+					<div class="spot-name-output">Huntington Beach Pier</div>
 				</div>
 				<div class="spot-distance-output">
 					<span class="spotDistTime">53<span> Mins
 				</div>
+				<div class="spot-conditions-card-div">
+					<span class="spot-conditions-tag tag-fair">Fair<span> 
+				</div>
 			</div>
-			<div class="singleSurfSpotCard active">
+			<div class="singleSurfSpotCard">
 				<div class="cardRowOne">
-					<div class="spot-name-output spot-name-fair">Newport Beach</div>
+					<div class="spot-name-output">Newport Beach</div>
 				</div>
 				<div class="spot-distance-output">
 					<span class="spotDistTime">55<span> Mins
 				</div>
+				<div class="spot-conditions-card-div">
+						<span class="spot-conditions-tag tag-poor">Poor<span> 
+					</div>
 			</div>
 			<div class="singleSurfSpotCard">
 					<div class="cardRowOne">
-						<div class="spot-name-output spot-name-poor">Laguna Beach</div>
+						<div class="spot-name-output">Laguna Beach</div>
 					</div>
 					<div class="spot-distance-output">
 						<span class="spotDistTime">59<span> Mins
+					</div>
+					<div class="spot-conditions-card-div">
+						<span class="spot-conditions-tag tag-good">Good<span> 
 					</div>
 				</div>
 		</div>
 	</div>
 	<div id="mainContent">
 		<!-- <div class="main-spot-name">Newport Beach</div> -->
-
+			<div id="container"></div>
+	
 	</div>
-
+	
 </body>
 
 </html>
