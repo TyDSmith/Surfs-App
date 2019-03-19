@@ -6,65 +6,52 @@ var spotID = null;
 
 let userLocation;
 
-// Insert API Key if needed (not needed for spitcast)
-var APIKey = "";
-// Insert URL of API
-var queryURL = "http://api.spitcast.com/api/spot-forecast/search";
-
-// Create AJAX call
-
 let spotArray= [];
 
 class Spot {
-    constructor(spotId, spotName, spotLat, spotLong) {
+    constructor(spotId, spotName, spotLat, spotLong, average) {
         this.spotId = spotId;
         this.spotLat = spotLat;
         this.spotLong = spotLong;
         this.spotName = spotName;
+        this.average = average;
     }
 }
 
-
-
-function findDistances (){
-    console.log(spotArray)
-    for(i = 0; i < spotArray.length; i++){
-        console.log([userLocation[0], userLocation[1]])
-        console.log([spotArray[i].spotLat, spotArray[i].spotLong])
-        let distance = haversineDistance([userLocation[0], userLocation[1]], [spotArray[i].spotLat, spotArray[i].spotLong])
-        spotArray[i].distance = distance;
-        //console.log(spotArray[i])
+function averageHeightPerHour (){
+    for(i=0; i < spotArray.length; i++){
+        spot = spotArray[i].spotId
+        $.ajax({
+            url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
+            method: "GET"
+            }).then(function(response){
+                console.log(response)
+                conditionArray = []
+                for(i = 0; i < response.length; i++){
+                    let status = response[i].size_ft
+                    conditionArray.push(status)
+                }
+                spotArray[i].sizeArray = conditionArray
+                console.log(spotArray[i])
+            });
     }
-    console.log(spotArray)
 }
 
-function findConditions (id) {
-    $.ajax({
-        url: `http://api.spitcast.com/api/spot/forecast/${id}/`,
-        method: "GET"
-    }).then(function(response) {
-        //console.log(response, "conditions")
-        for(i=0; i < response.length; i++){
-            //console.log(response[i].shape_full)
+//this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
+function displaySpotCards(spotID){
+    for(i=0;i< response[i].length; i++){
+        //console.log(spotID);
+        //display
+        styleSpotCard();
+    }
+};
 
-        }
-    })
+function styleSpotCard(spotID){
+    //this function will be used to apply styling based on the conditions of each spot
+    $("#" + spotID).style(sdfs)
+
+    //if spot conditions == fair ... apply class spot-name-fair
 }
-
-// function findDistance (place) {
-//     $.ajax({
-//         url: "https://api.opencagedata.com/geocode/v1/json?q=riverside%2C%20california&key=b0359f420459420d8b88c3125472360e&language=en&pretty=1",
-//         method: "GET"
-//     }).then(function(response) {
-//         let userLatitude = response.results[0].geometry.lat
-//         let userLongitude = response.results[0].geometry.Lng
-//     })
-//     let placeLatitude = place[0];
-//     let placeLongitude = place[1];
-//     console.log("user " + userLatitude, userLongitude)
-//     console.log("place " + placeLatitude, placeLongitude)
-// }
-
 
 function haversineDistance(coords1, coords2, isMiles) {
     function toRad(x) {
@@ -94,78 +81,31 @@ function haversineDistance(coords1, coords2, isMiles) {
     return d;
   }
 
-
-
-
-function averageHeightPerHour (spot){
-$.ajax({
-    url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
-
-    method: "GET"
-    }).then(function(response) {
-
-        for (i=0; i < response.length; i++)
-        var nameSpot= response[i].spot_name;
-        console.log(nameSpot);
-        console.log(spot);
-            for(i = 0; i < response.length; i++){
-                let answer = response[i].size_ft
-                //console.log(answer)
-            }
-    });
-}
-
-//this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
-function displaySpotCards(spotID){
-    for(i=0;i< response[i].length; i++){
-        console.log(spotID);
-        //display
-        styleSpotCard();
+function findDistances (){
+    for(i = 0; i < spotArray.length; i++){
+        let distance = haversineDistance([userLocation[0], userLocation[1]], [spotArray[i].spotLat, spotArray[i].spotLong])
+        spotArray[i].distance = distance;
     }
-};
-
-function styleSpotCard(spotID){
-    //this function will be used to apply styling based on the conditions of each spot
-    $("#" + spotID).style(sdfs)
-
-    //if spot conditions == fair ... apply class spot-name-fair
 }
 
 function findAllSpotIds () {
-
     $.ajax({
         url: "http://api.spitcast.com/api/spot-forecast/search",
         method: "GET"
         }).then(function(response) {
-
-            //console.log(response);
-            // console.log(response[0].spot_id);
-            // console.log(response[0].average.size_max);
             for(i = 0; i < response.length; i++){
                 var average = response[i].average.size;
                 var spotName = response[i].spot_name;
-                console.log(spotName)
                 var spotId = response[i].spot_id;
                 var spotLat = response[i].coordinates[1]
                 var spotLong = response[i].coordinates[0]
 
-                spotArray[i] = new Spot(spotId, spotName, spotLat, spotLong)
-                //console.log(spotArray[i])
-                //  console.log(spotName, spot);
+                spotArray[i] = new Spot(spotId, spotName, spotLat, spotLong, average)
             }
-            console.log(spotArray, "spotArray")
-            findDistances()
-            
-            for(i = 0; i < response.length; i++){
-                var average= response[i].average.size;
-                var spotName= response[i].spot_name;
-                var spot= response[i].spot_id;
-                averageHeightPerHour(spot);
-
-            }
-            //console.log(spotArray, "spotArray")
-        });
-    }
+            findDistances();
+            averageHeightPerHour();
+    });
+}
 
 function stealTheirLocation () {
     $.ajax({
@@ -174,10 +114,6 @@ function stealTheirLocation () {
         }).then(function(response) {
             let responseJSON = JSON.parse(response);
             userLocation = [responseJSON.latitude, responseJSON.longitude]
-            //console.log(userLocation, "response")
-            // console.log(responseJSON);
-            // console.log(responseJSON);
-            // let userLatitude = responseJSON.latitude;
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
             findAllSpotIds();
         });
@@ -185,7 +121,7 @@ function stealTheirLocation () {
 
 
 function surfSetup(){
-    stealTheirLocation();
+    stealTheirLocation()
 }
 
 //Toggle menu options
