@@ -1,4 +1,6 @@
+
 //global variables
+
 let userLocation;
 
 let spotArray= [];
@@ -46,19 +48,49 @@ function averageHeightPerHour (){
                     conditionArray.push(status)
                 }
                 spotArray[i].sizeArray = conditionArray
-                
 
             });
+            
     }
+    displaySpotCards();
 }
 
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
-function displaySpotCards(spotID){
-    for(i=0;i< response[i].length; i++){
-        //display
-        styleSpotCard();
-    }
-};
+
+function displaySpotCards(){
+
+        for(i=0; i < 4; i++){
+            spotName= spotArray[i].spotName;
+            spot = spotArray[i].spotId;
+         
+            var singleCardDiv = "<div class='singleSurfSpotCard'>";
+            var singleCardDivRowOne = "<div class='cardRowOne' id='card-spotid-" + spot + "'>";
+            var singleCardNameOutput = "<div class='spot-name-output'>"+spotName;
+            // var singleCardSpotConditions = spotArray[i].spotConditions;
+            var spotConditionsCardDiv = "<div class='spot-conditions-card-div'> <span class='spot-conditions-tag tag-fair'>" +"conditions<span>";
+            var closeDiv = "</div>";
+
+            console.log(spotName);
+
+            $(".surfSpotsList").prepend(singleCardDiv + singleCardDivRowOne  + singleCardNameOutput + closeDiv + closeDiv + spotConditionsCardDiv + closeDiv);
+            }
+            
+            //Toggle menu options
+            $(function() {
+                $('.singleSurfSpotCard').click(function(e) {
+                e.preventDefault();
+                $(this).addClass('active').siblings().removeClass('active');
+
+                });
+
+                $('.singleSurfSpotCard').click(function(e) {
+                    var spotName = $(this).find('.spot-name-output').text();
+                    $('#main-spot-name').html(spotName);
+                    
+                })
+});
+        };
+
 
 function styleSpotCard(spotID){
     //this function will be used to apply styling based on the conditions of each spot
@@ -132,44 +164,35 @@ function stealTheirLocation () {
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
 
             findAllSpotIds();
-            displaySpotCards();
+           
 
         });
 }
 
 
 function surfSetup(){
-    stealTheirLocation()
+    stealTheirLocation();
+    createChart();  
+
+
 }
 
 
-//Toggle menu options
-$(function() {
-    $('.singleSurfSpotCard').click(function(e) {
-       e.preventDefault();
-       $(this).addClass('active').siblings().removeClass('active');
 
-    });
-
-    $('.singleSurfSpotCard').click(function(e) {
-        var spotName = $(this).find('.spot-name-output').text();
-        $('#mainContent').html("<div class='main-spot-name'>"+spotName+"</div>");
-        
-    })
-});
 
 
 //show relevent content when button is pushed
 
 
 
-// Charting functionality
 
- anychart.onDocumentReady(function() {
 
-        // anychart.theme(anychart.themes.darkEarth);
-    
+
+function createChart(){
+
     // set the data
+    var spot = spotArray;
+
     var data = {
         header: ["Name", "Surf Height"],
         rows: [
@@ -179,8 +202,10 @@ $(function() {
             ["9AM", 5],
             ["10AM", 4.6],
             ["11AM", 5.5],
-            ["12PM", 4.3]
+            ["12PM", spot[1]]
+            
     ]};
+
 
     // create the chart
    var chart = anychart.column();
@@ -191,8 +216,7 @@ $(function() {
     // set the chart title
     chart.title("Surf Height");
 
-  // draw
-  chart.container("container");
-  chart.draw();
-});
-
+    // draw
+    chart.container("container");
+    chart.draw();
+}
