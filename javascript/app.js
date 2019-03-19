@@ -1,6 +1,10 @@
+
+//global variables
+
 let userLocation;
 
 let spotArray= [];
+let displayedSpots = [];
 
 class Spot {
     constructor(spotId, spotName, spotLat, spotLong, average) {
@@ -12,6 +16,25 @@ class Spot {
     }
 }
 
+/* <script>
+var points = [40, 100, 1, 5, 25, 10];
+document.getElementById("demo").innerHTML = points;  
+
+function myFunction() {
+  points.sort(function(a, b){return a - b});
+  document.getElementById("demo").innerHTML = points;
+}
+</script> */
+
+function getTopTen () {
+    spotArray.sort(function (a, b) {
+        return a.distance - b.distance;
+      });
+      console.log(spotArray)
+      displaySpotCards();
+}
+
+//load all the objects
 function averageHeightPerHour (){
     for(i=0; i < spotArray.length; i++){
         spot = spotArray[i].spotId
@@ -25,7 +48,7 @@ function averageHeightPerHour (){
                     conditionArray.push(status)
                 }
                 spotArray[i].sizeArray = conditionArray
-             
+
             });
             
     }
@@ -33,6 +56,7 @@ function averageHeightPerHour (){
 }
 
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
+
 function displaySpotCards(){
 
         for(i=0; i < 4; i++){
@@ -66,6 +90,7 @@ function displaySpotCards(){
                 })
 });
         };
+
 
 function styleSpotCard(spotID){
     //this function will be used to apply styling based on the conditions of each spot
@@ -107,6 +132,7 @@ function findDistances (){
         let distance = haversineDistance([userLocation[0], userLocation[1]], [spotArray[i].spotLat, spotArray[i].spotLong])
         spotArray[i].distance = distance;
     }
+    getTopTen()
 }
 
 function findAllSpotIds () {
@@ -121,9 +147,7 @@ function findAllSpotIds () {
                 var spotLat = response[i].coordinates[1]
                 var spotLong = response[i].coordinates[0]
 
-
                 spotArray[i] = new Spot(spotId, spotName, spotLat, spotLong, average)
-
             }
             findDistances();
             averageHeightPerHour();
@@ -150,7 +174,9 @@ function surfSetup(){
     stealTheirLocation();
     createChart();  
 
+
 }
+
 
 
 
