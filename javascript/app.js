@@ -59,7 +59,7 @@ function averageHeightPerHour (){
 
 function displaySpotCards(){
 
-        for(i=0; i < 4; i++){
+        for(i=0; i < 10; i++){
             spotName= spotArray[i].spotName;
             spot = spotArray[i].spotId;
          
@@ -72,7 +72,7 @@ function displaySpotCards(){
 
             console.log(spotName);
 
-            $(".surfSpotsList").prepend(singleCardDiv + singleCardDivRowOne  + singleCardNameOutput + closeDiv + closeDiv + spotConditionsCardDiv + closeDiv);
+            $(".surfSpotsList").append(singleCardDiv + singleCardDivRowOne  + singleCardNameOutput + closeDiv + closeDiv + spotConditionsCardDiv + closeDiv);
             }
             
             //Toggle menu options
