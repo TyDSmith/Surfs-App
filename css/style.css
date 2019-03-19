@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Jura');
 
 
-/*header*/
+/*====== Header =====*/
 #logo{
     height: 100%;
     width: auto;
@@ -36,8 +36,6 @@
     border-radius: 0 5px 5px 0;
     font-family: 'Jura', sans-serif;
 
-    
-
 }
 
 #yourLocationDiv{
@@ -58,19 +56,17 @@
 }
 
 .active{
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#23b2a8+0,7db9e8+100 */
-background: #23b2a8; /* Old browsers */
-background: -moz-linear-gradient(-45deg, #23b2a8 0%, #7db9e8 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(-45deg, #23b2a8 0%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(135deg, #23b2a8 0%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#23b2a8', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */    /* background: rgba(32, 184, 230, 0.623); */
-    /* background-image: url('https://www.shrinktank.com/wp-content/uploads/2015/04/bubble-slow-.gif'); */
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#23b2a8+0,7db9e8+100 */
+    background: #23b2a8; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #23b2a8 0%, #7db9e8 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #23b2a8 0%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #23b2a8 0%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#23b2a8', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */    /* background: rgba(32, 184, 230, 0.623); */
     border-radius: 0 5px 5px 0;
     border-left: solid 3px white;
 }
 
 .spot-conditions-tag{
-    background: rgb(71, 212, 90);
     color: white;
     font-weight: 600;
     padding: 5px;
@@ -91,16 +87,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#23b2a8', end
 .tag-poor{
     background: rgb(212, 92, 71);
 }
-/* .spot-name-good{
-    color: rgb(71, 212, 90);
-}
-.spot-name-fair{
-    color: rgb(146, 212, 71);
-}
-
-.spot-name-poor{
-    color: rgb(212, 71, 71);
-} */
 
 .spot-name-output{
     float: left;
@@ -112,22 +98,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#23b2a8', end
 }
 
 
-
 .spotDistTime{
     float: right;
     color: whitesmoke;
     margin-right: 2px;
 }
-
-
-
-/* .cardRowOne{
-    display: flex;
-    font-size: 1.6em;
-    line-height: 1em;
-} */
-
-
 
 
 .spot-height-output{
@@ -148,15 +123,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#23b2a8', end
 /* ====== Main Content ====== */
 
 .main-spot-name{
-    /* margin-top: 20px; */
     text-align: center;
     font-size: 2em;
     font-family: 'Jura', sans-serif;
-
-    /* font-family: 'Special Elite', cursive; */
 
 
 }
 
 
 
+
+/* Charting */
+#container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }

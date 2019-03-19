@@ -205,3 +205,37 @@ $(function() {
 
 //show relevent content when button is pushed
 
+
+
+// Charting functionality
+
+ anychart.onDocumentReady(function() {
+
+        // anychart.theme(anychart.themes.darkEarth);
+    
+    // set the data
+    var data = {
+        header: ["Name", "Surf Height"],
+        rows: [
+            ["6AM", 3],
+            ["7AM", 5],
+            ["8AM", 4],
+            ["9AM", 5],
+            ["10AM", 4.6],
+            ["11AM", 5.5],
+            ["12PM", 4.3]
+    ]};
+
+    // create the chart
+   var chart = anychart.column();
+
+    // add data
+    chart.data(data);
+
+    // set the chart title
+    chart.title("Surf Height");
+
+  // draw
+  chart.container("container");
+  chart.draw();
+});
