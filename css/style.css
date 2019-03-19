@@ -32,9 +32,15 @@
     color: rgb(32, 184, 230);
     height: 100%;
     font-size: 14px;
-    background: #080808e8;
+    background-image: url('/images/580b585b2edbce24c47b2732.png');
     border-radius: 0 5px 5px 0;
     font-family: 'Jura', sans-serif;
+
+}
+
+.sidebar-overlay{
+    opacity: 0.85;
+    background-color: black;
 
 }
 
