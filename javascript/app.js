@@ -1,9 +1,3 @@
-var fTemp = null;
-var lat = null;
-var long = null;
-
-var spotID = null;
-
 let userLocation;
 
 let spotArray= [];
@@ -25,16 +19,16 @@ function averageHeightPerHour (){
             url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
             method: "GET"
             }).then(function(response){
-                console.log(response)
+                // console.log(response)
                 conditionArray = []
                 for(i = 0; i < response.length; i++){
                     let status = response[i].size_ft
                     conditionArray.push(status)
                 }
                 spotArray[i].sizeArray = conditionArray
-                console.log(spotArray[i])
+                // console.log(spotArray[i])
             });
-    }
+        }
 }
 
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
@@ -106,6 +100,7 @@ function findAllSpotIds () {
             }
             findDistances();
             averageHeightPerHour();
+            console.log(spotArray)
     });
 }
 
@@ -157,15 +152,32 @@ $(function() {
     
     // set the data
     var data = {
-        header: ["Name", "Surf Height"],
+        header: ["NAME", "Surf Height"],
         rows: [
-            ["6AM", 3],
-            ["7AM", 5],
-            ["8AM", 4],
-            ["9AM", 5],
-            ["10AM", 4.6],
-            ["11AM", 5.5],
-            ["12PM", 4.3]
+            ["12AM", 3],
+            ["1AM", 5],
+            ["2AM", 4],
+            ["3AM", 5],
+            ["4AM", 4.6],
+            ["5AM", 5.5],
+            ["6AM", 4.3],
+            ["7AM", 4.3],
+            ["8AM", 4.3],
+            ["9AM", 4.3],
+            ["10AM", 4.3],
+            ["11AM", 4.3],
+            ["12PM", 4.3],
+            ["1PM", 4.3],
+            ["2PM", 4.3],
+            ["3PM", 4.3],
+            ["4PM", 4.3],
+            ["5PM", 4.3],
+            ["6PM", 4.3],
+            ["7PM", 4.3],
+            ["8PM", 4.3],
+            ["9PM", 4.3],
+            ["10PM", 4.3],
+            ["11PM", 4.3],
     ]};
 
     // create the chart
@@ -180,5 +192,6 @@ $(function() {
   // draw
   chart.container("container");
   chart.draw();
-});
+ });
+
 
