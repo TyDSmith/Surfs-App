@@ -1,4 +1,6 @@
+
 //global variables
+
 let userLocation;
 
 let spotArray= [];
@@ -14,7 +16,8 @@ class Spot {
     }
 }
 
-function getTopTen () {
+function orderObjects () {
+    console.log("called")
     spotArray.sort(function (a, b) {
         return a.distance - b.distance;
         });
@@ -23,24 +26,7 @@ function getTopTen () {
 }
 
 //load all the objects
-function averageHeightPerHour (callback){
-    for(i=0; i < spotArray.length; i++){
-        spot = spotArray[i].spotId
-        $.ajax({
-            url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
-            method: "GET"
-            }).then(function(response){
-                conditionArray = []
-                for(i = 0; i < response.length; i++){
-                    let status = response[i].size_ft
-                    conditionArray.push(status)
-                }
-                spotArray[i].sizeArray = conditionArray
-            });
-    }
-    findDistances();
-    callback()
-}
+
 
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
 function displaySpotCards(spotID){
@@ -49,6 +35,44 @@ function displaySpotCards(spotID){
     //     styleSpotCard();
     // }
 };
+
+
+//this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
+
+function displaySpotCards(){
+
+        for(i=0; i < 10; i++){
+            spotName= spotArray[i].spotName;
+            spot = spotArray[i].spotId;
+         
+            var singleCardDiv = "<div class='singleSurfSpotCard'>";
+            var singleCardDivRowOne = "<div class='cardRowOne' id='card-spotid-" + spot + "'>";
+            var singleCardNameOutput = "<div class='spot-name-output'>"+spotName;
+            // var singleCardSpotConditions = spotArray[i].spotConditions;
+            var spotConditionsCardDiv = "<div class='spot-conditions-card-div'> <span class='spot-conditions-tag tag-fair'>" +"conditions<span>";
+            var closeDiv = "</div>";
+
+            
+
+            $(".surfSpotsList").append(singleCardDiv + singleCardDivRowOne  + singleCardNameOutput + closeDiv + closeDiv + spotConditionsCardDiv + closeDiv);
+            }
+            
+            //Toggle menu options
+            $(function() {
+                $('.singleSurfSpotCard').click(function(e) {
+                e.preventDefault();
+                $(this).addClass('active').siblings().removeClass('active');
+
+                });
+
+                $('.singleSurfSpotCard').click(function(e) {
+                    var spotName = $(this).find('.spot-name-output').text();
+                    $('#main-spot-name').html(spotName);
+                    
+                })
+});
+        };
+
 
 function styleSpotCard(spotID){
     //this function will be used to apply styling based on the conditions of each spot
@@ -86,21 +110,47 @@ function haversineDistance(coords1, coords2, isMiles) {
   }
 
 function findDistances (){
-    console.log("find distances")
+   
     for(i = 0; i < spotArray.length; i++){
         let distance = haversineDistance([userLocation[0], userLocation[1]], [spotArray[i].spotLat, spotArray[i].spotLong])
         spotArray[i].distance = distance;
-        console.log(spotArray[i])
     }
-    console.log(spotArray)
-    getTopTen();
+    orderObjects();
 }
 
-function findAllSpotIds () {
+let position = 0
+
+function averageHeightPerHour (callback){
+    function myFunc(){
+        position++
+        if(position == spotArray.length){
+            console.log("run find distances")
+            findDistances();
+        }
+    }
+    for(x=0; x < spotArray.length; x++){
+        let spot = spotArray[position].spotId
+        $.ajax({
+            url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
+            method: "GET"
+            }).then(function(response){
+                var conditionArray = []
+                for(i = 0; i < response.length; i++){
+                    let status = response[i].size_ft
+                    conditionArray.push(status)
+                }
+                spotArray[position].sizeArray = conditionArray
+                myFunc();
+            });
+    }
+}
+
+function createSpotObjects () {
     $.ajax({
         url: "http://api.spitcast.com/api/spot-forecast/search",
         method: "GET"
         }).then(function(response) {
+            console.log(response)
             for(i = 0; i < response.length; i++){
                 var average = response[i].average.size;
                 var spotName = response[i].spot_name;
@@ -111,7 +161,7 @@ function findAllSpotIds () {
                 spotArray[i] = new Spot(spotId, spotName, spotLat, spotLong, average)
             }
             averageHeightPerHour(findDistances);
-    });
+        });
 }
 
 function stealTheirLocation () {
@@ -122,43 +172,32 @@ function stealTheirLocation () {
             let responseJSON = JSON.parse(response);
             userLocation = [responseJSON.latitude, responseJSON.longitude]
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
-            findAllSpotIds();
+            createSpotObjects();
         });
 }
 
 
 function surfSetup(){
-    stealTheirLocation()
+    stealTheirLocation();
+    createChart();  
 }
 
 
-//Toggle menu options
-$(function() {
-    $('.singleSurfSpotCard').click(function(e) {
-       e.preventDefault();
-       $(this).addClass('active').siblings().removeClass('active');
 
-    });
-
-    $('.singleSurfSpotCard').click(function(e) {
-        var spotName = $(this).find('.spot-name-output').text();
-        $('#mainContent').html("<div class='main-spot-name'>"+spotName+"</div>");
-        
-    })
-});
 
 
 //show relevent content when button is pushed
 
 
 
-// Charting functionality
 
- anychart.onDocumentReady(function() {
 
-        // anychart.theme(anychart.themes.darkEarth);
-    
+
+function createChart(){
+
     // set the data
+    var spot = spotArray;
+
     var data = {
         header: ["Name", "Surf Height"],
         rows: [
@@ -168,8 +207,10 @@ $(function() {
             ["9AM", 5],
             ["10AM", 4.6],
             ["11AM", 5.5],
-            ["12PM", 4.3]
+            ["12PM", spot[1]]
+            
     ]};
+
 
     // create the chart
    var chart = anychart.column();
@@ -180,8 +221,7 @@ $(function() {
     // set the chart title
     chart.title("Surf Height");
 
-  // draw
-  chart.container("container");
-  chart.draw();
-});
-
+    // draw
+    chart.container("container");
+    chart.draw();
+}
