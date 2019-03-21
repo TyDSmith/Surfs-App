@@ -20,9 +20,11 @@ function orderObjects () {
     console.log("called")
     spotArray.sort(function (a, b) {
         return a.distance - b.distance;
-        });
-    console.log(spotArray, "final")
-    displaySpotCards();
+
+      });
+    //   console.log(spotArray)
+      displaySpotCards();
+
 }
 
 //load all the objects
@@ -52,7 +54,6 @@ function displaySpotCards(){
             var spotConditionsCardDiv = "<div class='spot-conditions-card-div'> <span class='spot-conditions-tag tag-fair'>" +"conditions<span>";
             var closeDiv = "</div>";
 
-            
 
             $(".surfSpotsList").append(singleCardDiv + singleCardDivRowOne  + singleCardNameOutput + closeDiv + closeDiv + spotConditionsCardDiv + closeDiv);
             }
@@ -174,22 +175,28 @@ function stealTheirLocation () {
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
             createSpotObjects();
         });
+
 }
+
+
+
 
 
 function surfSetup(){
     stealTheirLocation();
-    createChart();  
+    
+    setTimeout(createChart, 500);
 }
-
-
-
 
 
 //show relevent content when button is pushed
 
 
+// TY - try to get hourly size_ft
 
+function getHourlySpotConditions(){
+    
+};
 
 
 
@@ -197,17 +204,19 @@ function createChart(){
 
     // set the data
     var spot = spotArray;
+    console.log(spot);
+    console.log(spot[0].average);
 
     var data = {
         header: ["Name", "Surf Height"],
         rows: [
-            ["6AM", 3],
-            ["7AM", 5],
+            ["6AM", spot[0].average],
+            ["7AM", spot[0].average],
             ["8AM", 4],
             ["9AM", 5],
             ["10AM", 4.6],
             ["11AM", 5.5],
-            ["12PM", spot[1]]
+            ["12PM", 4]
             
     ]};
 
@@ -222,6 +231,40 @@ function createChart(){
     chart.title("Surf Height");
 
     // draw
-    chart.container("container");
+    chart.container("chartContainer");
     chart.draw();
 }
+
+
+// function createWindChart(){
+
+//     // set the data
+//     var spot = spotArray;
+
+//     var data = {
+//         header: ["Name", "Wind Direction"],
+//         rows: [
+//             ["6AM", 150],
+//             ["7AM", 150],
+//             ["8AM", 140],
+//             ["9AM", 145],
+//             ["10AM", 150],
+//             ["11AM", 155],
+//             ["12PM", 160]
+            
+//     ]};
+
+
+//     // create the wind chart
+//    var chart = anychart.column();
+
+//     // add data
+//     chart.data(data);
+
+//     // set the chart title
+//     chart.title("Wind Information");
+
+//     // draw
+//     chart.container("containerWind");
+//     chart.draw();
+// }
