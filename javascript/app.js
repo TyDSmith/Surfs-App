@@ -6,6 +6,8 @@ let userLocation;
 let spotArray= [];
 let displayedSpots = [];
 
+
+
 class Spot {
     constructor(spotId, spotName, spotLat, spotLong, average) {
         this.spotId = spotId;
@@ -48,7 +50,7 @@ function displaySpotCards(){
             spot = spotArray[i].spotId;
          
             var singleCardDiv = "<div class='singleSurfSpotCard'>";
-            var singleCardDivRowOne = "<div class='cardRowOne' id='card-spotid-" + spot + "'>";
+            var singleCardDivRowOne = "<div class='cardRowOne' id='" + spot + "'>";
             var singleCardNameOutput = "<div class='spot-name-output'>"+spotName;
             // var singleCardSpotConditions = spotArray[i].spotConditions;
             var spotConditionsCardDiv = "<div class='spot-conditions-card-div'> <span class='spot-conditions-tag tag-fair'>" +"conditions<span>";
@@ -69,10 +71,20 @@ function displaySpotCards(){
                 $('.singleSurfSpotCard').click(function(e) {
                     var spotName = $(this).find('.spot-name-output').text();
                     $('#main-spot-name').html(spotName);
+    
+                    var spotID = $(this).find('.cardRowOne').attr('id');
+                    $('#main-spot-id-test').attr('id', spotID);
+                    $('#main-spot-id-test').addClass('mainspotID');
+                    displaySpotMainInfo(spotID);
                     
                 })
-});
-        };
+
+
+
+                
+            })
+};
+        
 
 
 function styleSpotCard(spotID){
@@ -125,7 +137,7 @@ function averageHeightPerHour (callback){
     function myFunc(){
         position++
         if(position == spotArray.length){
-            console.log("run find distances")
+            //console.log("run find distances")
             findDistances();
         }
     }
@@ -136,12 +148,12 @@ function averageHeightPerHour (callback){
             url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
             method: "GET"
             }).then(function(response){
-                console.log(response)
+                //console.log("line 151", response)
                 var heightArray = []
                 for(i = 0; i < response.length; i++){
                     heightArray.push(response[i].size_ft)
                 }
-                console.log(heightArray);
+                //console.log(heightArray);
                 spotArray[position].heightArray = heightArray
                 myFunc();
             });
@@ -182,39 +194,72 @@ function surfSetup(){
     stealTheirLocation();
     
     setTimeout(createChart, 500);
+
 }
 
 
 //show relevent content when button is pushed
 
 
-// TY - try to get hourly size_ft
+// when button is clicked, repopulate main content with info of selected spot
+function displaySpotMainInfo(spotID){
+    console.log(spotID);
 
-function getHourlySpotConditions(){
+    $.ajax({
+        url: "http://api.spitcast.com/api/spot/forecast/"+ spotID + "/",
+        method: "GET"
+        }).then(function(response){
+            console.log(response);
+            createChart(response);
+    });
     
+
 };
 
-function createChart(){
+function createChart(response){
+console.log('line220');
+    if (response == undefined){
+        return;
+    }
 
     // set the data
     var spot = spotArray;
     // console.log(spot);
     // console.log(spot[0].average);
+    // console.log(spot[0].spotName);
+// //[
+//     ["12AM", spot[0].average],
+//     ["1AM", spot[0].average],
+//     ["2AM", 4],
+//     ["3AM", 5],
+//     ["4AM", 4.6],
+//     ["5AM", 5.5],
+//     ["6AM", 4.25],
+//     ["7AM", 4.75],
+//     ["8AM", 5.15],
+//     ["9AM", 4],
+    
+// ]};
+
+    var ajaxRows = [];
+    for (i=0; i < response.length; i++){
+
+        var rowItem = [];
+        rowItem.push(response[i].hour);
+        rowItem.push(response[i].size_ft);
+        ajaxRows.push(rowItem);
+    }
 
     var data = {
         header: ["Name", "Surf Height"],
-        rows: [
-            ["6AM", spot[0].average],
-            ["7AM", spot[0].average],
-            ["8AM", 4],
-            ["9AM", 5],
-            ["10AM", 4.6],
-            ["11AM", 5.5],
-            ["12PM", 4]
-            
-    ]};
+        rows: ajaxRows
+    
+    
+    };
 
+    console.log('dataready', data);
 
+    $('#chartContainer').text("");
     // create the chart
    var chart = anychart.column();
 
@@ -228,37 +273,3 @@ function createChart(){
     chart.container("chartContainer");
     chart.draw();
 }
-
-
-// function createWindChart(){
-
-//     // set the data
-//     var spot = spotArray;
-
-//     var data = {
-//         header: ["Name", "Wind Direction"],
-//         rows: [
-//             ["6AM", 150],
-//             ["7AM", 150],
-//             ["8AM", 140],
-//             ["9AM", 145],
-//             ["10AM", 150],
-//             ["11AM", 155],
-//             ["12PM", 160]
-            
-//     ]};
-
-
-//     // create the wind chart
-//    var chart = anychart.column();
-
-//     // add data
-//     chart.data(data);
-
-//     // set the chart title
-//     chart.title("Wind Information");
-
-//     // draw
-//     chart.container("containerWind");
-//     chart.draw();
-// }
