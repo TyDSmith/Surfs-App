@@ -14,26 +14,16 @@ class Spot {
     }
 }
 
-/* <script>
-var points = [40, 100, 1, 5, 25, 10];
-document.getElementById("demo").innerHTML = points;  
-
-function myFunction() {
-  points.sort(function(a, b){return a - b});
-  document.getElementById("demo").innerHTML = points;
-}
-</script> */
-
 function getTopTen () {
     spotArray.sort(function (a, b) {
         return a.distance - b.distance;
-      });
-      console.log(spotArray)
-      displaySpotCards();
+        });
+    console.log(spotArray, "final")
+    displaySpotCards();
 }
 
 //load all the objects
-function averageHeightPerHour (){
+function averageHeightPerHour (callback){
     for(i=0; i < spotArray.length; i++){
         spot = spotArray[i].spotId
         $.ajax({
@@ -46,18 +36,18 @@ function averageHeightPerHour (){
                     conditionArray.push(status)
                 }
                 spotArray[i].sizeArray = conditionArray
-                
-
             });
     }
+    findDistances();
+    callback()
 }
 
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
 function displaySpotCards(spotID){
-    for(i=0;i< response[i].length; i++){
-        //display
-        styleSpotCard();
-    }
+    // for(i=0;i< response[i].length; i++){
+    //     //display
+    //     styleSpotCard();
+    // }
 };
 
 function styleSpotCard(spotID){
@@ -96,11 +86,14 @@ function haversineDistance(coords1, coords2, isMiles) {
   }
 
 function findDistances (){
+    console.log("find distances")
     for(i = 0; i < spotArray.length; i++){
         let distance = haversineDistance([userLocation[0], userLocation[1]], [spotArray[i].spotLat, spotArray[i].spotLong])
         spotArray[i].distance = distance;
+        console.log(spotArray[i])
     }
-    getTopTen()
+    console.log(spotArray)
+    getTopTen();
 }
 
 function findAllSpotIds () {
@@ -117,8 +110,7 @@ function findAllSpotIds () {
 
                 spotArray[i] = new Spot(spotId, spotName, spotLat, spotLong, average)
             }
-            findDistances();
-            averageHeightPerHour();
+            averageHeightPerHour(findDistances);
     });
 }
 
@@ -130,10 +122,7 @@ function stealTheirLocation () {
             let responseJSON = JSON.parse(response);
             userLocation = [responseJSON.latitude, responseJSON.longitude]
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
-
             findAllSpotIds();
-            displaySpotCards();
-
         });
 }
 
