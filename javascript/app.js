@@ -22,7 +22,7 @@ function orderObjects () {
         return a.distance - b.distance;
 
       });
-    //   console.log(spotArray)
+    console.log(spotArray)
       displaySpotCards();
 
 }
@@ -130,17 +130,19 @@ function averageHeightPerHour (callback){
         }
     }
     for(x=0; x < spotArray.length; x++){
-        let spot = spotArray[position].spotId
+        let spot = spotArray[x].spotId
+        console.log(spot);
         $.ajax({
             url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
             method: "GET"
             }).then(function(response){
-                var conditionArray = []
+                console.log(response)
+                var heightArray = []
                 for(i = 0; i < response.length; i++){
-                    let status = response[i].size_ft
-                    conditionArray.push(status)
+                    heightArray.push(response[i].size_ft)
                 }
-                spotArray[position].sizeArray = conditionArray
+                console.log(heightArray);
+                spotArray[position].heightArray = heightArray
                 myFunc();
             });
     }
@@ -151,7 +153,6 @@ function createSpotObjects () {
         url: "http://api.spitcast.com/api/spot-forecast/search",
         method: "GET"
         }).then(function(response) {
-            console.log(response)
             for(i = 0; i < response.length; i++){
                 var average = response[i].average.size;
                 var spotName = response[i].spot_name;
@@ -175,12 +176,7 @@ function stealTheirLocation () {
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
             createSpotObjects();
         });
-
 }
-
-
-
-
 
 function surfSetup(){
     stealTheirLocation();
@@ -198,14 +194,12 @@ function getHourlySpotConditions(){
     
 };
 
-
-
 function createChart(){
 
     // set the data
     var spot = spotArray;
-    console.log(spot);
-    console.log(spot[0].average);
+    // console.log(spot);
+    // console.log(spot[0].average);
 
     var data = {
         header: ["Name", "Surf Height"],
