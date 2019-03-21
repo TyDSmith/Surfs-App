@@ -137,7 +137,7 @@ function averageHeightPerHour (callback){
     function myFunc(){
         position++
         if(position == spotArray.length){
-            console.log("run find distances")
+            //console.log("run find distances")
             findDistances();
         }
     }
@@ -148,12 +148,12 @@ function averageHeightPerHour (callback){
             url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
             method: "GET"
             }).then(function(response){
-                console.log(response)
+                //console.log("line 151", response)
                 var heightArray = []
                 for(i = 0; i < response.length; i++){
                     heightArray.push(response[i].size_ft)
                 }
-                console.log(heightArray);
+                //console.log(heightArray);
                 spotArray[position].heightArray = heightArray
                 myFunc();
             });
@@ -205,35 +205,61 @@ function surfSetup(){
 function displaySpotMainInfo(spotID){
     console.log(spotID);
 
+    $.ajax({
+        url: "http://api.spitcast.com/api/spot/forecast/"+ spotID + "/",
+        method: "GET"
+        }).then(function(response){
+            console.log(response);
+            createChart(response);
+    });
+    
+
 };
 
-function createChart(){
+function createChart(response){
+console.log('line220');
+    if (response == undefined){
+        return;
+    }
 
     // set the data
     var spot = spotArray;
-    console.log(spot);
-    console.log(spot[0].average);
-    console.log(spot[0].spotName);
+    // console.log(spot);
+    // console.log(spot[0].average);
+    // console.log(spot[0].spotName);
+// //[
+//     ["12AM", spot[0].average],
+//     ["1AM", spot[0].average],
+//     ["2AM", 4],
+//     ["3AM", 5],
+//     ["4AM", 4.6],
+//     ["5AM", 5.5],
+//     ["6AM", 4.25],
+//     ["7AM", 4.75],
+//     ["8AM", 5.15],
+//     ["9AM", 4],
+    
+// ]};
 
+    var ajaxRows = [];
+    for (i=0; i < response.length; i++){
+
+        var rowItem = [];
+        rowItem.push(response[i].hour);
+        rowItem.push(response[i].size_ft);
+        ajaxRows.push(rowItem);
+    }
 
     var data = {
         header: ["Name", "Surf Height"],
-        rows: [
-            ["12AM", spot[0].average],
-            ["1AM", spot[0].average],
-            ["2AM", 4],
-            ["3AM", 5],
-            ["4AM", 4.6],
-            ["5AM", 5.5],
-            ["6AM", 4.25],
-            ["7AM", 4.75],
-            ["8AM", 5.15],
-            ["9AM", 4],
+        rows: ajaxRows
+    
+    
+    };
 
-            
-    ]};
+    console.log('dataready', data);
 
-
+    $('#chartContainer').text("");
     // create the chart
    var chart = anychart.column();
 
