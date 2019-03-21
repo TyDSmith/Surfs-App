@@ -16,44 +16,28 @@ class Spot {
     }
 }
 
-/* <script>
-var points = [40, 100, 1, 5, 25, 10];
-document.getElementById("demo").innerHTML = points;  
-
-function myFunction() {
-  points.sort(function(a, b){return a - b});
-  document.getElementById("demo").innerHTML = points;
-}
-</script> */
-
-function getTopTen () {
+function orderObjects () {
+    console.log("called")
     spotArray.sort(function (a, b) {
         return a.distance - b.distance;
+
       });
     //   console.log(spotArray)
       displaySpotCards();
+
 }
 
 //load all the objects
-function averageHeightPerHour (){
-    for(i=0; i < spotArray.length; i++){
-        spot = spotArray[i].spotId
-        $.ajax({
-            url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
-            method: "GET"
-            }).then(function(response){
-                conditionArray = []
-                for(i = 0; i < response.length; i++){
-                    let status = response[i].size_ft
-                    conditionArray.push(status)
-                }
-                spotArray[i].sizeArray = conditionArray
 
-            });
-            
-    }
-    displaySpotCards();
-}
+
+//this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
+function displaySpotCards(spotID){
+    // for(i=0;i< response[i].length; i++){
+    //     //display
+    //     styleSpotCard();
+    // }
+};
+
 
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
 
@@ -70,7 +54,6 @@ function displaySpotCards(){
             var spotConditionsCardDiv = "<div class='spot-conditions-card-div'> <span class='spot-conditions-tag tag-fair'>" +"conditions<span>";
             var closeDiv = "</div>";
 
-            // console.log(spotName);
 
             $(".surfSpotsList").append(singleCardDiv + singleCardDivRowOne  + singleCardNameOutput + closeDiv + closeDiv + spotConditionsCardDiv + closeDiv);
             }
@@ -128,18 +111,47 @@ function haversineDistance(coords1, coords2, isMiles) {
   }
 
 function findDistances (){
+   
     for(i = 0; i < spotArray.length; i++){
         let distance = haversineDistance([userLocation[0], userLocation[1]], [spotArray[i].spotLat, spotArray[i].spotLong])
         spotArray[i].distance = distance;
     }
-    getTopTen()
+    orderObjects();
 }
 
-function findAllSpotIds () {
+let position = 0
+
+function averageHeightPerHour (callback){
+    function myFunc(){
+        position++
+        if(position == spotArray.length){
+            console.log("run find distances")
+            findDistances();
+        }
+    }
+    for(x=0; x < spotArray.length; x++){
+        let spot = spotArray[position].spotId
+        $.ajax({
+            url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
+            method: "GET"
+            }).then(function(response){
+                var conditionArray = []
+                for(i = 0; i < response.length; i++){
+                    let status = response[i].size_ft
+                    conditionArray.push(status)
+                }
+                spotArray[position].sizeArray = conditionArray
+                myFunc();
+            });
+    }
+}
+
+function createSpotObjects () {
     $.ajax({
         url: "http://api.spitcast.com/api/spot-forecast/search",
         method: "GET"
         }).then(function(response) {
+            console.log(response)
             for(i = 0; i < response.length; i++){
                 var average = response[i].average.size;
                 var spotName = response[i].spot_name;
@@ -149,11 +161,8 @@ function findAllSpotIds () {
 
                 spotArray[i] = new Spot(spotId, spotName, spotLat, spotLong, average)
             }
-            findDistances();
-            averageHeightPerHour();
-
-    // console.log(spotArray);
-    });
+            averageHeightPerHour(findDistances);
+        });
 }
 
 function stealTheirLocation () {
@@ -164,13 +173,11 @@ function stealTheirLocation () {
             let responseJSON = JSON.parse(response);
             userLocation = [responseJSON.latitude, responseJSON.longitude]
             $("#yourLocation").text(responseJSON.city+", "+ responseJSON.state);
-
-            findAllSpotIds();
-     
-
+            createSpotObjects();
         });
 
 }
+
 
 
 
@@ -179,7 +186,6 @@ function surfSetup(){
     stealTheirLocation();
     
     setTimeout(createChart, 500);
- 
 }
 
 
