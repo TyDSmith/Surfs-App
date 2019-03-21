@@ -144,7 +144,7 @@
 
 
 /* Charting */
-#container {
+#chartContainer {
     width: 75%;
     height: 54%;
     margin: auto;
@@ -153,10 +153,31 @@
    
   }
 
+ #containerWind{
+    width: 75%;
+    height: 54%;
+    margin: auto;
+    padding: 0;
+    display: inline-block;
+ } 
+
+
+
+
+
 
   .anychart-credits{
       display: none;
   }
+
+
+
+/* Spot Statistics Display */
+
+.spot-statistics{
+    display: inline;
+}
+
 
 /* Make mobile friendly  */
   @media screen and (max-width:650px){
