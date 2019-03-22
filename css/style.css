@@ -132,7 +132,8 @@
 
 
 #mainContent{
-    /* display: inline-block; */
+    
+    text-align: center;
 }
 
 #main-spot-name{
@@ -140,6 +141,11 @@
     font-size: 2em;
     font-family: 'Jura', sans-serif;
 
+}
+
+.chart-placeholder{
+    color: red;
+    text-align: center;
 }
 
 
@@ -150,6 +156,7 @@
     margin: auto;
     padding: 0;
     display: inline-block;
+    text-align: center;
    
   }
 
@@ -169,6 +176,7 @@
     padding: 5px;
     text-align: center;
     border-radius: 5px;
+    font-family: 'Jura', sans-serif;
 }
 
 

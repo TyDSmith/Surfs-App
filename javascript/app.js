@@ -238,7 +238,7 @@ function createChart(response){
     }
 
     var data = {
-        header: ["Name", "Surf Height"],
+        header: ["Name", "Surf Height (ft)"],
         rows: ajaxRows
     
     };
