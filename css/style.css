@@ -161,7 +161,30 @@
     display: inline-block;
  } 
 
+/* Wind Conditions Styling */
 
+#windConditionsOutput{
+    color: white;
+    font-size: 2em;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+
+.windCondition-Fair{
+
+    background-color: rgb(0, 81, 255);
+}
+.windCondition-Poor-Fair{
+    background-color: rgb(255, 153, 0);
+}
+.windCondition-Poor{
+    background-color: rgb(202, 52, 6);
+}
+.windCondition-Good{
+    background-color: rgb(0, 167, 50);
+}
 
 
 
