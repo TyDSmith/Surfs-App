@@ -258,7 +258,6 @@ function createChart(response){
     // draw
     chart.container("chartContainer");
     chart.draw();
-    anychart.color.lighten("#FF0000", 0.2)
 
 
 }
