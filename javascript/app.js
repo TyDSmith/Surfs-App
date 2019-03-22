@@ -19,12 +19,12 @@ class Spot {
 }
 
 function orderObjects () {
-    console.log("called")
+    //console.log("called")
     spotArray.sort(function (a, b) {
         return a.distance - b.distance;
 
       });
-    console.log(spotArray)
+    //console.log(spotArray)
       displaySpotCards();
 
 }
@@ -143,7 +143,7 @@ function averageHeightPerHour (callback){
     }
     for(x=0; x < spotArray.length; x++){
         let spot = spotArray[x].spotId
-        console.log(spot);
+        //console.log(spot);
         $.ajax({
             url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
             method: "GET"
@@ -198,8 +198,6 @@ function surfSetup(){
 }
 
 
-//show relevent content when button is pushed
-
 
 // when button is clicked, repopulate main content with info of selected spot
 function displaySpotMainInfo(spotID){
@@ -211,35 +209,24 @@ function displaySpotMainInfo(spotID){
         }).then(function(response){
             console.log(response);
             createChart(response);
+            //output conditions
+            $('#windConditionsOutput').html(response[12].shape_detail.wind);
+            $('#windConditionsOutput').removeClass();
+            $('#windConditionsOutput').addClass('windCondition-' + response[12].shape_detail.wind);
+            //$('.spot-conditions-tag').html(response[12].shape_detail.wind);
+
     });
     
 
 };
 
 function createChart(response){
-console.log('line220');
     if (response == undefined){
         return;
     }
 
     // set the data
     var spot = spotArray;
-    // console.log(spot);
-    // console.log(spot[0].average);
-    // console.log(spot[0].spotName);
-// //[
-//     ["12AM", spot[0].average],
-//     ["1AM", spot[0].average],
-//     ["2AM", 4],
-//     ["3AM", 5],
-//     ["4AM", 4.6],
-//     ["5AM", 5.5],
-//     ["6AM", 4.25],
-//     ["7AM", 4.75],
-//     ["8AM", 5.15],
-//     ["9AM", 4],
-    
-// ]};
 
     var ajaxRows = [];
     for (i=0; i < response.length; i++){
@@ -251,9 +238,8 @@ console.log('line220');
     }
 
     var data = {
-        header: ["Name", "Surf Height"],
+        header: ["Name", "Surf Height (ft)"],
         rows: ajaxRows
-    
     
     };
 
@@ -272,4 +258,7 @@ console.log('line220');
     // draw
     chart.container("chartContainer");
     chart.draw();
+    anychart.color.lighten("#FF0000", 0.2)
+
+
 }
