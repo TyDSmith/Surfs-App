@@ -24,7 +24,7 @@ function orderObjects () {
         return a.distance - b.distance;
 
       });
-    //console.log(spotArray)
+    console.log(spotArray)
       displaySpotCards();
 
 }
@@ -149,12 +149,15 @@ function averageHeightPerHour (callback){
             method: "GET"
             }).then(function(response){
                 //console.log("line 151", response)
-                var heightArray = []
+                var heightArray = [];
+                var windArray = [];
                 for(i = 0; i < response.length; i++){
                     heightArray.push(response[i].size_ft)
+                    windArray.push(response[i].shape_detail.wind)
                 }
                 //console.log(heightArray);
-                spotArray[position].heightArray = heightArray
+                spotArray[position].windArray = windArray;
+                spotArray[position].heightArray = heightArray;
                 myFunc();
             });
     }
