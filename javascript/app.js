@@ -24,7 +24,6 @@ function orderObjects() {
   displaySpotCards();
 }
 
-//this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
 
 function displaySpotCards() {
   for (i = 0; i < 10; i++) {
@@ -213,6 +212,7 @@ function createChart(response) {
     return;
   }
 
+
   // set the data
   var spot = spotArray;
 
@@ -223,6 +223,34 @@ function createChart(response) {
     rowItem.push(response[i].size_ft);
     ajaxRows.push(rowItem);
   }
+
+    var ajaxRows = [];
+    for (i=0; i < response.length; i++){
+        console.log(response[i].shape_detail.wind)
+        switch(response[i].shape_detail.wind){
+            case "Poor": 
+                color = "red";
+                break;
+            case "Poor-Fair":
+                color = "orange";
+                break;
+            case "Fair":
+                color = "blue";
+                break;
+            default: 
+                color = "yellow";
+                break;
+
+        }
+        var rowItem = {};
+        rowItem.x = response[i].hour
+        rowItem.value = response[i].size_ft
+        // rowItem.label = {enabled:true, fontColor: color, fontWeight:900, format: "${%value}"}
+        rowItem.fill = color;
+        rowItem.stroke = color;      
+        ajaxRows.push(rowItem);
+    }
+
 
   var data = {
     header: ["Name", "Surf Height (ft)"],
