@@ -161,7 +161,7 @@ function createSpotObjects() {
 
 function stealTheirLocation() {
   $.ajax({
-    url: "http://geoip-db.com/json/",
+    url: "https://geoip-db.com/json/",
     method: "GET"
   }).then(function(response) {
     let responseJSON = JSON.parse(response);
