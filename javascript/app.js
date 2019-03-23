@@ -29,7 +29,7 @@ function orderObjects () {
 
 }
 
-//load all the objects
+//load all the objectsspo
 
 
 //this is to display the card for each spot, might want to put this in the findNearSpots for loop instead
@@ -235,10 +235,28 @@ function createChart(response){
 
     var ajaxRows = [];
     for (i=0; i < response.length; i++){
+        console.log(response[i].shape_detail.wind)
+        switch(response[i].shape_detail.wind){
+            case "Poor": 
+                color = "red";
+                break;
+            case "Poor-Fair":
+                color = "orange";
+                break;
+            case "Fair":
+                color = "blue";
+                break;
+            default: 
+                color = "yellow";
+                break;
 
-        var rowItem = [];
-        rowItem.push(response[i].hour);
-        rowItem.push(response[i].size_ft);
+        }
+        var rowItem = {};
+        rowItem.x = response[i].hour
+        rowItem.value = response[i].size_ft
+        // rowItem.label = {enabled:true, fontColor: color, fontWeight:900, format: "${%value}"}
+        rowItem.fill = color;
+        rowItem.stroke = color;      
         ajaxRows.push(rowItem);
     }
 
