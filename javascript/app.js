@@ -16,11 +16,9 @@ class Spot {
 }
 
 function orderObjects() {
-  //console.log("called")
   spotArray.sort(function(a, b) {
     return a.distance - b.distance;
   });
-  //console.log(spotArray)
   displaySpotCards();
 }
 
@@ -34,7 +32,6 @@ function displaySpotCards() {
     var singleCardDiv = "<div class='singleSurfSpotCard'>";
     var singleCardDivRowOne = "<div class='cardRowOne' id='" + spot + "'>";
     var singleCardNameOutput = "<div class='spot-name-output'>" + spotName;
-    // var singleCardSpotConditions = spotArray[i].spotConditions;
     var spotConditionsCardDiv =
       "<div class='spot-conditions-card-div'> <span class='spot-conditions-tag tag-" +
       conditions +
@@ -58,34 +55,22 @@ function displaySpotCards() {
   $(function() {
     $(".singleSurfSpotCard").click(function(e) {
       e.preventDefault();
-      $(this)
-        .addClass("active")
-        .siblings()
-        .removeClass("active");
+      $(this).addClass("active").siblings().removeClass("active");
     });
 
     $(".singleSurfSpotCard").click(function(e) {
-      var spotName = $(this)
-        .find(".spot-name-output")
-        .text();
+      var spotName = $(this).find(".spot-name-output").text();
       $("#main-spot-name").html(spotName);
 
-      var spotID = $(this)
-        .find(".cardRowOne")
-        .attr("id");
+      var spotID = $(this).find(".cardRowOne").attr("id");
       $("#main-spot-id-test").attr("id", spotID);
       $("#main-spot-id-test").addClass("mainspotID");
       displaySpotMainInfo(spotID);
+      
     });
   });
 }
 
-function styleSpotCard(spotID) {
-  //this function will be used to apply styling based on the conditions of each spot
-  $("#" + spotID).style(sdfs);
-
-  //if spot conditions == fair ... apply class spot-name-fair
-}
 
 function haversineDistance(coords1, coords2, isMiles) {
   function toRad(x) {
@@ -183,6 +168,7 @@ function stealTheirLocation() {
     userLocation = [responseJSON.latitude, responseJSON.longitude];
     $("#yourLocation").text(responseJSON.city + ", " + responseJSON.state);
     createSpotObjects();
+    
   });
 }
 
@@ -190,6 +176,7 @@ function surfSetup() {
   stealTheirLocation();
   setTimeout(createChart, 500);
 }
+
 
 // when button is clicked, repopulate main content with info of selected spot
 function displaySpotMainInfo(spotID) {
@@ -199,11 +186,6 @@ function displaySpotMainInfo(spotID) {
     method: "GET"
   }).then(function(response) {
     createChart(response);
-    $("#windConditionsOutput").html(response[12].shape_detail.wind);
-    $("#windConditionsOutput").removeClass();
-    $("#windConditionsOutput").addClass(
-      "windCondition-" + response[12].shape_detail.wind
-    );
   });
 }
 
@@ -211,7 +193,6 @@ function createChart(response) {
   if (response == undefined) {
     return;
   }
-
 
   // set the data
   var spot = spotArray;
@@ -226,7 +207,6 @@ function createChart(response) {
 
     var ajaxRows = [];
     for (i=0; i < response.length; i++){
-        console.log(response[i].shape_detail.wind)
         switch(response[i].shape_detail.wind){
             case "Poor": 
                 color = "#DC7664";
@@ -248,15 +228,14 @@ function createChart(response) {
                 break;
 
         }
+
         var rowItem = {};
         rowItem.x = response[i].hour
         rowItem.value = response[i].size_ft
-        // rowItem.label = {enabled:true, fontColor: color, fontWeight:900, format: "${%value}"}
         rowItem.fill = color;
         rowItem.stroke = color;      
         ajaxRows.push(rowItem);
     }
-
 
   var data = {
     header: ["Name", "Surf Height (ft)"],
@@ -264,6 +243,7 @@ function createChart(response) {
   };
 
   $("#chartContainer").text("");
+
   // create the chart
   var chart = anychart.column();
 
@@ -271,13 +251,10 @@ function createChart(response) {
   chart.data(data);
 
   // set the chart title
-  chart.title("Surf Height");
+  chart.title("Surf Height (ft)");
 
   // draw
   chart.container("chartContainer");
   chart.draw();
-
-  //set padding
-  //chart.stroke(2);
 
 }
