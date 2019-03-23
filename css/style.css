@@ -1,235 +1,240 @@
 /* Import Fonts */
-@import url('https://fonts.googleapis.com/css?family=Jura');
-
+@import url("https://fonts.googleapis.com/css?family=Jura");
 
 /*====== Header =====*/
-#logo{
-    height: 100%;
-    width: auto;
+#logo {
+  height: 100%;
+  width: auto;
 }
 
-
 #navHeader {
-    display: inline;
+  display: inline;
 }
 
 .header {
-    height: 15vh;
+  height: 15vh;
 }
 
 #dropdown {
-    float: right;
+  float: right;
 }
-
-
-
 
 /*====== Sidebar ======*/
 
-.sidebar{
-    float: left;
-    display: inline-block;
-    width: 25%;
-    max-width: 200px;
-    color: rgb(32, 184, 230);
-    font-size: 14px;
-    background-image: url('/images/580b585b2edbce24c47b2732.png');
-    border-radius: 0 5px 5px 0;
-    font-family: 'Jura', sans-serif;
-
+.sidebar {
+  float: left;
+  display: inline-block;
+  width: 25%;
+  max-width: 200px;
+  color: rgb(32, 184, 230);
+  font-size: 14px;
+  background-image: url("/images/580b585b2edbce24c47b2732.png");
+  border-radius: 0 5px 5px 0;
+  font-family: "Jura", sans-serif;
 }
 
-.sidebar-overlay{
-    opacity: 0.85;
-    background-color: black;
-
+.sidebar-overlay {
+  opacity: 0.85;
+  background-color: black;
 }
 
-#yourLocationDiv{
-    text-align: center;
+#yourLocationDiv {
+  text-align: center;
+  margin-bottom: 5px;
 }
 
-#yourLocation{
-    font-weight: 600;
+#yourLocation {
+  font-weight: 600;
 }
-
 
 /*=== Surf Spot Card Layout ===*/
-.singleSurfSpotCard{
-    padding: 2px;
-    height: 78px;
-    margin-bottom: 3px;
-    border-left: solid 3px rgb(32, 184, 230);
+.singleSurfSpotCard {
+  padding: 2px;
+  height: 78px;
+  margin-bottom: 3px;
+  border-left: solid 3px rgb(32, 184, 230);
 }
 
-.active{
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#23b2a8+0,7db9e8+100 */
-    background: #23b2a8; /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #23b2a8 0%, #7db9e8 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #23b2a8 0%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #23b2a8 0%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#23b2a8', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */    /* background: rgba(32, 184, 230, 0.623); */
-    border-radius: 0 5px 5px 0;
-    border-left: solid 3px white;
+.active {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#23b2a8+0,7db9e8+100 */
+  background: #23b2a8; /* Old browsers */
+  background: -moz-linear-gradient(
+    -45deg,
+    #23b2a8 0%,
+    #7db9e8 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    -45deg,
+    #23b2a8 0%,
+    #7db9e8 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    135deg,
+    #23b2a8 0%,
+    #7db9e8 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#23b2a8', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */ /* background: rgba(32, 184, 230, 0.623); */
+  border-radius: 0 5px 5px 0;
+  border-left: solid 3px white;
 }
 
-.spot-conditions-tag{
-    color: white;
-    font-weight: 600;
-    padding: 5px;
-    clear: both;
-    float: left;
-    text-align: center;
-    min-width: 50px;
+.spot-conditions-tag {
+  color: white;
+  font-weight: 600;
+  padding: 5px;
+  clear: both;
+  float: left;
+  text-align: center;
+  min-width: 50px;
 }
 
-.tag-good{
-    background: rgb(71, 212, 90);
+.tag-good {
+  background: rgb(71, 212, 90);
 }
 
-.tag-fair-good{
-    background: rgb(71, 212, 181);
+.tag-fair-good {
+  background: rgb(71, 212, 181);
 }
 
-.tag-fair{
-    background: rgb(71, 137, 212);
+.tag-fair {
+  background: rgb(71, 137, 212);
 }
 
-.tag-poor-fair{
-    background: orange;
+.tag-poor-fair {
+  background: orange;
 }
 
-.tag-poor{
-    background: rgb(212, 92, 71);
+.tag-poor {
+  background: rgb(212, 92, 71);
 }
 
-
-.spot-name-output{
-    float: left;
-    font-size: 1.2em;
-    font-weight: 600;
-    width: 98%;
-    line-height: 1.1em;
-    color: white;
-    margin-bottom: 8px;
+.spot-name-output {
+  float: left;
+  font-size: 1.2em;
+  font-weight: 600;
+  width: 98%;
+  line-height: 1.1em;
+  color: white;
+  margin-bottom: 8px;
 }
 
-
-.spotDistTime{
-    float: right;
-    color: whitesmoke;
-    margin-right: 2px;
+.spotDistTime {
+  float: right;
+  color: whitesmoke;
+  margin-right: 2px;
 }
 
-
-.spot-height-output{
-   /* float: right; */
-    flex: 1;
-    text-align: right;
-    clear: both;
+.spot-height-output {
+  /* float: right; */
+  flex: 1;
+  text-align: right;
+  clear: both;
 }
 
-.spot-conditions-output{
-    margin-bottom: 3px;
-    text-align: center;
-    flex: 2;
-    border-radius: 20px;
+.spot-conditions-output {
+  margin-bottom: 3px;
+  text-align: center;
+  flex: 2;
+  border-radius: 20px;
 }
-
 
 /* ====== Main Content ====== */
 
-
-#mainContent{
-    text-align: center;
-    position: fixed;
-    width: 75%;
-    height: 100%;
-    left: 25%;
+#mainContent {
+  text-align: center;
+  position: fixed;
+  width: 75%;
+  height: 100%;
+  left: 25%;
 }
 
-#main-spot-name{
-    text-align: center;
-    font-size: 2em;
-    font-family: 'Jura', sans-serif;
-
+#main-spot-name {
+  text-align: center;
+  font-size: 2em;
+  font-family: "Jura", sans-serif;
 }
 
-.chart-placeholder{
-    color: red;
-    text-align: center;
-    font-size: 1.5em;
+.chart-placeholder {
+  color: red;
+  text-align: center;
+  font-size: 1.5em;
 }
-
 
 /* Charting */
 #chartContainer {
-    width: 75%;
-    height: 54%;
-    margin: auto;
-    padding: 0;
-    display: inline-block;
-    text-align: center;
-   
-  }
+  width: 95%;
+  height: 54%;
+  max-height: 365px;
+  margin: auto;
+  padding: 0;
+  display: inline-block;
+  text-align: center;
+}
 
- #containerWind{
-    width: 75%;
-    height: 54%;
-    margin: auto;
-    padding: 0;
-    display: inline-block;
- } 
+#containerWind {
+  width: 75%;
+  height: 54%;
+  margin: auto;
+  padding: 0;
+  display: inline-block;
+}
 
 /* Wind Conditions Styling */
-
-#windConditionsOutput{
-    color: white;
-    font-size: 2em;
-    padding: 5px;
-    text-align: center;
-    border-radius: 5px;
-    font-family: 'Jura', sans-serif;
+#windConditionsDiv h2 {
+  margin-bottom: 28px;
 }
 
-
-.windCondition-Fair{
-
-    background-color: rgb(0, 81, 255);
-}
-.windCondition-Poor-Fair{
-    background-color: rgb(255, 153, 0);
-}
-.windCondition-Poor{
-    background-color: rgb(202, 52, 6);
-}
-.windCondition-Good{
-    background-color: rgb(0, 167, 50);
+#windConditionsOutput {
+  color: white;
+  font-size: 2em;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  font-family: "Jura", sans-serif;
 }
 
+.windCondition-Fair {
+  background-color: rgb(0, 81, 255);
+}
+.windCondition-Poor-Fair {
+  background-color: rgb(255, 153, 0);
+}
+.windCondition-Poor {
+  background-color: rgb(202, 52, 6);
+}
+.windCondition-Good {
+  background-color: rgb(0, 167, 50);
+}
 
-
-
-  .anychart-credits{
-      display: none;
-  }
-
-
+.anychart-credits {
+  display: none;
+}
 
 /* Spot Statistics Display */
 
-.spot-statistics{
-    display: inline;
+.spot-statistics {
+  display: inline;
 }
 
-
 /* Make mobile friendly  */
-  @media screen and (max-width:650px){
-    .singleSurfSpotCard{
-        height: 112px;
-    }
-
-    .spot-conditions-tag{
-        width: 100%;
-    }
+@media screen and (max-width: 650px) {
+  .sidebar {
+    /* display: none; */
   }
+  .mainContent {
+    /* margin: auto; */
+  }
+
+  .singleSurfSpotCard {
+    height: 78px;
+  }
+
+  .spot-conditions-tag {
+    width: 100%;
+    display: none;
+  }
+
+  #chartContainer {
+    max-height: 265px;
+  }
+}
