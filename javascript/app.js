@@ -48,12 +48,14 @@ function displaySpotCards(){
         for(i=0; i < 10; i++){
             spotName= spotArray[i].spotName;
             spot = spotArray[i].spotId;
+            conditions = spotArray[i].windArray[12]
+            
          
             var singleCardDiv = "<div class='singleSurfSpotCard'>";
             var singleCardDivRowOne = "<div class='cardRowOne' id='" + spot + "'>";
-            var singleCardNameOutput = "<div class='spot-name-output'>"+spotName;
+            var singleCardNameOutput = "<div class='spot-name-output'>" + spotName;
             // var singleCardSpotConditions = spotArray[i].spotConditions;
-            var spotConditionsCardDiv = "<div class='spot-conditions-card-div'> <span class='spot-conditions-tag tag-fair'>" +"conditions<span>";
+            var spotConditionsCardDiv = "<div class='spot-conditions-card-div'> <span class='spot-conditions-tag tag-" + conditions + "'>" + conditions + "<span>";
             var closeDiv = "</div>";
 
 
