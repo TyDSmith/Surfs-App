@@ -16,9 +16,11 @@ class Spot {
 }
 
 function orderObjects() {
+  //console.log("called")
   spotArray.sort(function(a, b) {
     return a.distance - b.distance;
   });
+  //console.log(spotArray)
   displaySpotCards();
 }
 
@@ -122,7 +124,6 @@ function findDistances() {
       [userLocation[0], userLocation[1]],
       [spotArray[i].spotLat, spotArray[i].spotLong]
     );
-
     spotArray[i].distance = distance;
   }
   orderObjects();
@@ -139,7 +140,6 @@ function averageHeightPerHour(callback) {
   }
   for (x = 0; x < spotArray.length; x++) {
     let spot = spotArray[x].spotId;
-
     $.ajax({
       url: "http://api.spitcast.com/api/spot/forecast/" + spot + "/",
       method: "GET"
@@ -150,7 +150,6 @@ function averageHeightPerHour(callback) {
         heightArray.push(response[i].size_ft);
         windArray.push(response[i].shape_detail.wind);
       }
-  
       spotArray[position].windArray = windArray;
       spotArray[position].heightArray = heightArray;
       myFunc();
@@ -195,17 +194,17 @@ function surfSetup() {
 
 // when button is clicked, repopulate main content with info of selected spot
 function displaySpotMainInfo(spotID) {
+
   $.ajax({
     url: "http://api.spitcast.com/api/spot/forecast/" + spotID + "/",
     method: "GET"
   }).then(function(response) {
     createChart(response);
-    
-    //output conditions
     $("#windConditionsOutput").html(response[12].shape_detail.wind);
     $("#windConditionsOutput").removeClass();
-    $("#windConditionsOutput").addClass("windCondition-" + response[12].shape_detail.wind);
-
+    $("#windConditionsOutput").addClass(
+      "windCondition-" + response[12].shape_detail.wind
+    );
   });
 }
 
@@ -244,6 +243,4 @@ function createChart(response) {
   chart.container("chartContainer");
   chart.draw();
 
-  // set the padding between column groups
-  chart.barGroupsPadding(-0.3);
 }
