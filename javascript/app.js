@@ -229,16 +229,22 @@ function createChart(response) {
         console.log(response[i].shape_detail.wind)
         switch(response[i].shape_detail.wind){
             case "Poor": 
-                color = "red";
+                color = "#DC7664";
                 break;
             case "Poor-Fair":
-                color = "orange";
+                color = "#FFB242";
                 break;
             case "Fair":
-                color = "blue";
+                color = "#659BDA";
+                break;
+            case "Fair-Good":
+                color = "#6BDAC0";
+                break;
+            case "Good":
+                color = "green";
                 break;
             default: 
-                color = "yellow";
+                color = "#82C2DE";
                 break;
 
         }
@@ -270,5 +276,8 @@ function createChart(response) {
   // draw
   chart.container("chartContainer");
   chart.draw();
+
+  //set padding
+  //chart.stroke(2);
 
 }
