@@ -1,56 +1,48 @@
 <html lang="en">
-
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="shortcut icon" href="../Surfs-app/images/favicon.ico" />
+	<link rel="shortcut icon" href="../Surfs-app/images/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="./images/favicons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./images/favicons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./images/favicons/favicon-16x16.png">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
     <title>Surf's App</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <script src="./javascript/jquery-v3.3.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-		<script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
-		<script src="https://cdn.anychart.com/releases/8.0.0/themes/dark_earth.min.js" type="text/javascript"></script>
-		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-		<script src="./javascript/app.js"></script>
+	<script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
+	<script src="https://cdn.anychart.com/releases/8.0.0/themes/dark_earth.min.js" type="text/javascript"></script>
+	<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script src="./javascript/app.js"></script>
   </head>
 
-
 <body onload="surfSetup();">
-
 	<div class="sidebar sidebar-overlay">
 		<span id="location-div" style="width:40%;">
 			<div id="yourLocationDiv">Your Location: <br><span id="yourLocation"></span></div>
-			</span><span style="width:10%"></span>
+		</span><span style="width:10%"></span>
 		<div class="surfSpotsList"></div>
 	</div>
-	</div>
-	<div id="mainContent" class= "container-fluid">
-		<div id="main-spot-name" >Newport Beach</div>
+
+	<div id="mainContent" class="container-fluid">
+		<div id="main-spot-name">Newport Beach</div>
 		<div id="main-spot-id-test" class=""></div>
-			<div id="chartContainer"><span class="chart-placeholder">Click a spot to load chart</span></div>
-			<div id='chartDiv'></div>
-
-			<div class="spot-statistics row">
-				<div id="windConditionsDiv" class="col-12">
-					<h2>Wind Conditions</h2>
-					<div><span id="windConditionsOutput">Click a spot to load</span></div>
-					<div id = "hourlyWindData"><span id="hourlyWindData-output"></span></div>
-	
-				</div>
-				<!-- <div id="water-temp-output" class="col-sm-4">
-					<h2>Water temp</h2>
-					<div><span id="water-temp-num">Click a spot to load</span></div>
-				</div>
-
-				<div id="wetsuit-recommendation-output" class="col-sm-4">
-					<h2>Recommended Wetsuit:</h2>
-					<div><span id="water-temp-num">Click a spot to load</span></div>
-				</div> -->
+		<div id="chartContainer"><span class="chart-placeholder">Click a spot to load chart</span></div>
+		<div id='chartDiv'></div>
+		<div class="spot-statistics row">
+			<div id="windConditionsDiv" class="col-12">
+				<h2>Conditions</h2>
+				<div><span id="windConditionsOutput"><span style="color: red; font-size: 22px">Click a spot to load</span></span></div>
+				<div id="hourlyWindData"><span id="hourlyWindData-output"></span></div>
 			</div>
-	
+		</div>
+
 	</div>
-	
+
 </body>
 
 </html>
