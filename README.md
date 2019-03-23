@@ -9,7 +9,7 @@ A collaboration between Ty Daniel Smith, Parker Bjur, & Orlando Rangel
 
 ### Features
 * Use user location (by IP Address) to display the ten closest surf spots
-* Render surf height charts for the current day
+* Render surf height charts for the current day along with wind conditions by hour
 * Display current surf conditions based on wind
 
 ### Future Features
