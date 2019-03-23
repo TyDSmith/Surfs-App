@@ -95,6 +95,10 @@
     background: rgb(212, 92, 71);
 }
 
+.tag-poor-fair{
+    background: orange;
+}
+
 .spot-name-output{
     float: left;
     font-size: 1.2em;
