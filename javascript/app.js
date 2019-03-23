@@ -24,7 +24,7 @@ function orderObjects () {
         return a.distance - b.distance;
 
       });
-    console.log(spotArray)
+    //console.log(spotArray)
       displaySpotCards();
 
 }
@@ -48,7 +48,7 @@ function displaySpotCards(){
         for(i=0; i < 10; i++){
             spotName= spotArray[i].spotName;
             spot = spotArray[i].spotId;
-            conditions = spotArray[i].windArray[0]
+            conditions = spotArray[i].windArray[12]
             
          
             var singleCardDiv = "<div class='singleSurfSpotCard'>";
@@ -150,14 +150,13 @@ function averageHeightPerHour (callback){
             url: "http://api.spitcast.com/api/spot/forecast/"+ spot + "/",
             method: "GET"
             }).then(function(response){
-                //console.log("line 151", response)
                 var heightArray = [];
                 var windArray = [];
                 for(i = 0; i < response.length; i++){
                     heightArray.push(response[i].size_ft)
                     windArray.push(response[i].shape_detail.wind)
                 }
-                //console.log(heightArray);
+                console.log(windArray);
                 spotArray[position].windArray = windArray;
                 spotArray[position].heightArray = heightArray;
                 myFunc();
@@ -206,18 +205,19 @@ function surfSetup(){
 
 // when button is clicked, repopulate main content with info of selected spot
 function displaySpotMainInfo(spotID){
-    console.log(spotID);
+    // console.log(spotID);
 
     $.ajax({
         url: "http://api.spitcast.com/api/spot/forecast/"+ spotID + "/",
         method: "GET"
         }).then(function(response){
-            console.log(response);
+            //console.log(response);
             createChart(response);
             //output conditions
             $('#windConditionsOutput').html(response[12].shape_detail.wind);
             $('#windConditionsOutput').removeClass();
             $('#windConditionsOutput').addClass('windCondition-' + response[12].shape_detail.wind);
+
             //$('.spot-conditions-tag').html(response[12].shape_detail.wind);
 
     });
@@ -248,7 +248,7 @@ function createChart(response){
     
     };
 
-    console.log('dataready', data);
+    
 
     $('#chartContainer').text("");
     // create the chart
@@ -263,7 +263,4 @@ function createChart(response){
     // draw
     chart.container("chartContainer");
     chart.draw();
-    anychart.color.lighten("#FF0000", 0.2)
-
-
 }

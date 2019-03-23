@@ -87,23 +87,28 @@
     background: rgb(71, 212, 90);
 }
 
-.tag-fair{
-    background: rgb(71, 137, 212);
+.tag-fair-good{
+    background: rgb(71, 212, 181);
 }
 
-.tag-poor{
-    background: rgb(212, 92, 71);
+.tag-fair{
+    background: rgb(71, 137, 212);
 }
 
 .tag-poor-fair{
     background: orange;
 }
 
+.tag-poor{
+    background: rgb(212, 92, 71);
+}
+
+
 .spot-name-output{
     float: left;
     font-size: 1.2em;
     font-weight: 600;
-    width: 65%;
+    width: 98%;
     line-height: 1.1em;
     color: white;
     margin-bottom: 8px;
@@ -121,11 +126,11 @@
    /* float: right; */
     flex: 1;
     text-align: right;
-   clear: both;
+    clear: both;
 }
+
 .spot-conditions-output{
     margin-bottom: 3px;
- 
     text-align: center;
     flex: 2;
     border-radius: 20px;
