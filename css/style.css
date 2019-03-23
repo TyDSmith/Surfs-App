@@ -141,8 +141,11 @@
 
 
 #mainContent{
-    
     text-align: center;
+    position: fixed;
+    width: 75%;
+    height: 100%;
+    left: 25%;
 }
 
 #main-spot-name{
