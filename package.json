@@ -1,0 +1,19 @@
+{
+  "name": "surfs-app",
+  "version": "1.0.0",
+  "description": "## Description A web app for checking surf reports and recommending a spot based on location and conditions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TyDSmith/Surfs-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TyDSmith/Surfs-App/issues"
+  },
+  "homepage": "https://github.com/TyDSmith/Surfs-App#readme"
+}
