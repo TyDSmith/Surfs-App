@@ -16,3 +16,8 @@ A collaboration between Ty Daniel Smith, Parker Bjur, & Orlando Rangel
 
 * Allow user to set other locations
 * Account setup for individual users to set favorites
+
+![surf's App Screenshot](./images/surfsapp-screenshot.png)
+
+
+
